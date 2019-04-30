@@ -1,0 +1,111 @@
+#parse("/shared/framework.vm")
+
+<div class="content-header pb20">
+    <h2 style="text-align: center; font-size: 24px; font-weight: 600;">
+        <span class="text-primary" data-component="title">
+            Crea quote per azienda
+        </span>
+    </h2>
+</div>
+
+<div class="content-wrapper">
+    <div class="panel panel-default center-column col-md-12" >
+        <div class="section row p50">
+            <div class="tab-content admin-form">
+                #*<div class="section row">
+                    <div class="field-container">
+                        <div class="field-label"><b>Data Inizio:</b></div>
+                        <div class="field-value"><div id="dataInizio" class="field-element"></div></div>
+                    </div>
+                    <div class="field-container">
+                        <div class="field-label"><b>Data Fine:</b></div>
+                        <div class="field-value"><div id="dataFine" class="field-element"></div></div>
+                    </div>
+                </div>
+                <div class="section row">
+                    <div class="field-container">
+                        <div class="field-label"><b>Importo:</b></div>
+                        <div class="field-value"><div id="amount" class="field-element"></div></div>
+                    </div>
+                </div>*#
+                <div class="section row">
+                    <form action="your-action" id="form-container">
+                        <div id="form"></div>
+                    </form>
+                </div>
+
+                <div style="display: flex" class="section row">
+                    <button id="ricercaAzienda" class="btn btn-primary mrn proceed-btn" type="submit" data-component="submit_button">
+                        <i class="glyphicon glyphicon-search pr5"></i> Ricerca azienda
+                    </button>
+                    <button id="azzeraRicerca" class="btn btn-primary mrn proceed-btn" style="display:none" type="submit" data-component="submit_button">
+                        <i class="glyphicon glyphicon-remove pr5"></i>
+                    </button>
+
+                    <div class="field-container">
+                        <div class="field-label"><b>Azienda:</b></div>
+                        <div class="field-value">
+                            <div id="azienda" data-id="5" class="field-element"></div>
+                        </div>
+                    </div>
+                    <div class="field-container">
+                        <div class="field-label"><b>Regione:</b></div>
+                        <div class="field-value">
+                            <div id="regione" data-id="7" class="field-element"></div>
+                        </div>
+                    </div>
+                    <div class="field-container">
+                        <div class="field-label"><b>Provincia:</b></div>
+                        <div class="field-value">
+                            <div id="provincia" data-id="3" class="field-element"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="procedi" class="btn btn-primary mrn proceed-btn" type="submit" data-component="submit_button">
+        <i class="glyphicon glyphicon-save pr5"></i> Procedi
+    </button>
+
+    <button  style="display: none" id="cancel-form-btn" class="btn btn-primary mrn proceed-btn" >
+        <i class="glyphicon glyphicon-save pr5"></i> Annulla
+    </button>
+
+    <button id="send-data-btn" class="btn btn-primary mrn proceed-btn" style="display: none">
+        <i class="glyphicon glyphicon-save pr5"></i> Invia dati
+    </button>
+
+</div>
+
+
+
+## POPUP WINDOW
+<div id="popupContainer">
+
+</div>
+<div class="popup-content">
+    <div class='popup-search-field mb20'>
+        <div id='cercaAziendaTextBox'/>
+        <div id='cercaAziendaButton'></div>
+    </div>
+    <div id='aziendeGrid'/>
+</div>
+
+
+<div id="resultsContainer" style="display: none">
+    <table class="quote-table">
+        <tbody>
+            <tr>
+
+                <th>Lavoratore</th>
+                <th>Settore</th>
+                <th>Contratto</th>
+                <th>Importo quota</th>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+

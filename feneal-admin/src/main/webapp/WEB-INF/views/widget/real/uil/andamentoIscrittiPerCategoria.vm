@@ -1,0 +1,36 @@
+<script type="text/javascript">
+
+    require(["widget/real/uil/andamentoIscrittiPerCategoria"], function(manager){
+
+        var name = '$widgetName';
+        var header = '$widgetParams';
+        var andamento = new manager.andamento(name, header);
+        andamento.init();
+
+    });
+
+</script>
+
+<div class="panel-heading">
+    <span class="panel-title">Andamento iscritti per categoria</span>
+    <span class="panel-controls">
+        <a class="panel-control-loader" href="#"></a>
+        <a class="panel-control-remove" href="#"></a>
+    ##        <a class="panel-control-title" href="#"></a>
+        <a class="panel-control-color" href="#"></a>
+        <a class="panel-control-collapse" href="#"></a>
+        <a class="panel-control-fullscreen" href="#"></a>
+    </span>
+</div>
+
+<div class="panel-body andamento-iscritti-provincia-container">
+
+    <div id="container-highcharts" class="chToResize" style="height: 400px;width: 100%">
+
+    </div>
+
+    <div class="param-fields-container" style="display: none">
+
+    </div>
+
+</div>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="applica.feneal.domain.model.core.quote.RiepilogoQuoteAssociative" table="fenealweb_riepilogoQuoteAssociative" >
+		<id name="id" type="long">
+			<generator class="native" />
+		</id>
+		<property name="dataRegistrazione" />
+		<property name="dataDocumento" />
+		<property name="tipoDocumento" />
+
+		<property name="azienda" />
+		<property name="competenza" />
+		<property name="companyId" type="long" />
+
+		<property name="provincia" />
+		<property name="guid" />
+		<property name="originalFileServerPath" />
+		<property name="importedLogFilePath" />
+		<property name="xmlFileServerPath" />
+
+
+		<property name="exporterName"/>
+		<property name="exporterMail"/>
+		<property name="totalAmount"/>
+
+
+
+	</class>
+</hibernate-mapping>

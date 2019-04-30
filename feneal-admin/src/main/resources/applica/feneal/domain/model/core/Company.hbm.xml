@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="applica.feneal.domain.model.core.Company" table="fenealweb_company" >
+		<id name="id" type="long">
+			<generator class="native" />
+		</id>
+		<property name="description" />
+		<list name="provinces" table="fenealweb_companies_provinces" lazy="false" >
+			<key column="companyId" />
+			<list-index column="idx" />
+			<many-to-many class="applica.feneal.domain.model.geo.Province" column="provinceId" />
+		</list>
+
+		<property name="tipoConfederazione"/>
+		<property name="mailSenderAsString"  />
+		<property name="mailSender"  />
+		<property name="smsUsername" />
+		<property name="smsPassword" />
+		<property name="smsSenderNumber" />
+		<property name="smsSenderAlias" />
+
+	</class>
+</hibernate-mapping>
