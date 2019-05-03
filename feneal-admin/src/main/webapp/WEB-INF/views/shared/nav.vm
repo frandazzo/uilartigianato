@@ -107,19 +107,6 @@
                     </a>
                 </li>
 
-
-
-##                <li class="sidebar-label pt20">Gestione email</li>
-##
-##                <li class="">
-##                    <a href="#/crud?e=emaillayout" class="framework-navigation">
-##                        <span class="fa fa-list-alt"></span>
-##                        <span class="sidebar-title">Tipi layout</span>
-##                    </a>
-##                </li>
-
-
-
             #end
 
             #if ($roleid == 5) ##Nazionale
@@ -137,14 +124,18 @@
                         <span class="sidebar-title">Importa quote associative</span>
                     </a>
                 </li>
-
-
-##                <li class="">
-##                    <a href="#/quotesettore" class="framework-navigation">
-##                        <span class="fa fa-tasks"></span>
-##                        <span class="sidebar-title">Crea quote per settore</span>
-##                    </a>
-##                </li>
+                <li class="">
+                    <a href="#/importdatiunc" class="framework-navigation">
+                        <span class="fa fa-check-square-o"></span>
+                        <span class="sidebar-title">Importa dati Unc</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#/importdatibil" class="framework-navigation">
+                        <span class="fa fa-check-square-o"></span>
+                        <span class="sidebar-title">Importa dati Bilateralità</span>
+                    </a>
+                </li>
                 <li class="">
                     <a href="#/quoteimpianti" class="framework-navigation">
                         <span class="fa fa-tasks"></span>
@@ -163,26 +154,9 @@
                         <span class="sidebar-title">Visualizzazione bonifici</span>
                     </a>
                 </li>
-##                <li class="">
-##                    <a href="#/quotemanuali" class="framework-navigation">
-##                        <span class="fa fa-tasks"></span>
-##                        <span class="sidebar-title">Crea quote manuali</span>
-##                    </a>
-##                </li>
-##                <li class="">
-##                    <a href="#/quotebrevimano" class="framework-navigation">
-##                        <span class="fa fa-tasks"></span>
-##                        <span class="sidebar-title">Crea iscrizione diretta</span>
-##                    </a>
-##                </li>
-
-
-
-
-
             #end
 
-#if ($roleid == 3)  ## regionale
+    #if ($roleid == 3)  ## regionale
     <li class="sidebar-label pt20">Quote associative</li>
     <li class="">
         <a href="#/quoteassociative" class="framework-navigation">
@@ -191,12 +165,6 @@
         </a>
     </li>
     #end
-
-
-
-
-
-
 
         ##REPORTISTICA
             #if ($roleid ==3  ||
@@ -209,115 +177,177 @@
             #if ($roleid ==3  ||
                 $roleid == 5 ||
                 $roleid == 6 )
+
+                ##DELEGHE
                 <li>
-                    <a href="#/riepilogo" class="framework-navigation">
-                        <span class="glyphicons glyphicons-building"></span>
-                        <span class="sidebar-title">Riepilogo iscritti</span>
+                    <a class="accordion-toggle" href="#" title="nominativi di lavoratori inseriti dagli Operatori Intercategoriali Uil Artigianato">
+                        <span class="glyphicons glyphicons-edit"></span>
+                        <span class="sidebar-title">Deleghe</span>
+                        <span class="caret"></span>
                     </a>
-                </li>
-                <li>
-                    <a href="#/pivot" class="framework-navigation">
-                        <span class="glyphicons glyphicons-building"></span>
-                        <span class="sidebar-title">Analisi iscritti</span>
-                    </a>
+                    <ul class="nav sub-nav" style="">
+                        <li class="active">
+                            <a href="#/reportdeleghe" class="framework-navigation">
+                                <span class="fa fa-bar-chart-o"></span>
+                                <span class="sidebar-title">Report</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/pivotdeleghe" class="framework-navigation">
+                                <span class="glyphicons glyphicons-stats"></span>
+                                <span class="sidebar-title">Analisi</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/riepilogodeleghe" class="framework-navigation">
+                                <span class="glyphicons glyphicons-pie_chart"></span>
+                                <span class="sidebar-title">Riepilogo</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
+                ##ISCRITTI
+                <li>
+                    <a class="accordion-toggle" href="#" title="deleghe che hanno dato luogo ad un pagamento di quota tessera">
+                        <span class="glyphicons glyphicons-adress_book"></span>
+                        <span class="sidebar-title">Iscritti</span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="nav sub-nav" style="">
+                        <li class="active">
+                            <a href="#/reportiscritti" class="framework-navigation">
+                                <span class="fa fa-bar-chart-o"></span>
+                                <span class="sidebar-title">Report</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/pivot" class="framework-navigation">
+                                <span class="glyphicons glyphicons-stats"></span>
+                                <span class="sidebar-title">Analisi</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/riepilogo" class="framework-navigation">
+                                <span class="glyphicons glyphicons-pie_chart"></span>
+                                <span class="sidebar-title">Riepilogo</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
+                ##QUOTE
+                #if($roleid == 5)
+
+                    <li>
+                        <a href="#/reportiqa" class="framework-navigation">
+                            <span class="fa fa-bar-chart-o"></span>
+                            <span class="sidebar-title">Report quote</span>
+                        </a>
+                    </li>
+
+                #end
+
+                ##PROVENIENZAUNC
                 <li>
-                    <a href="#/riepilogodeleghe" class="framework-navigation">
-                        <span class="glyphicons glyphicons-building"></span>
-                        <span class="sidebar-title">Riepilogo deleghe</span>
+                    <a class="accordion-toggle" href="#" title="dati trasmessi dalle UNC che gestiscono direttamente il tesseramento">
+                        <span class="fa fa-archive"></span>
+                        <span class="sidebar-title">Provenienza UNC</span>
+                        <span class="caret"></span>
                     </a>
+                    <ul class="nav sub-nav" style="">
+                        <li class="active">
+                            <a href="#/reportprovenienzaunc" class="framework-navigation">
+                                <span class="fa fa-bar-chart-o"></span>
+                                <span class="sidebar-title">Report</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/pivotprovenienzaunc" class="framework-navigation">
+                                <span class="glyphicons glyphicons-stats"></span>
+                                <span class="sidebar-title">Analisi</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/riepilogoprovenienzaunc" class="framework-navigation">
+                                <span class="glyphicons glyphicons-pie_chart"></span>
+                                <span class="sidebar-title">Riepilogo</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
+                ##PROVBILAT
                 <li>
-                    <a href="#/pivotdeleghe" class="framework-navigation">
-                        <span class="glyphicons glyphicons-building"></span>
-                        <span class="sidebar-title">Analisi deleghe</span>
+                    <a class="accordion-toggle" href="#"  title="lavoratori contattati tramite la bilateralità">
+                        <span class="glyphicons glyphicon-retweet"></span>
+                        <span class="sidebar-title">Provenienza Bilateralità</span>
+                        <span class="caret"></span>
                     </a>
+                    <ul class="nav sub-nav" style="">
+                        <li class="active">
+                            <a href="#/reportprovenienzabilat" class="framework-navigation">
+                                <span class="fa fa-bar-chart-o"></span>
+                                <span class="sidebar-title">Report</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/pivotprovenienzabilat" class="framework-navigation">
+                                <span class="glyphicons glyphicons-stats"></span>
+                                <span class="sidebar-title">Analisi</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/riepilogoprovenienzabilat" class="framework-navigation">
+                                <span class="glyphicons glyphicons-pie_chart"></span>
+                                <span class="sidebar-title">Riepilogo</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
+
+                ##TOTALE
+                <li>
+                    <a class="accordion-toggle" href="#">
+                        <span class="glyphicons glyphicons-more_items"></span>
+                        <span class="sidebar-title">Totale</span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="nav sub-nav" style="">
+                        <li class="active">
+                            <a href="#/reporttotale" class="framework-navigation">
+                                <span class="fa fa-bar-chart-o"></span>
+                                <span class="sidebar-title">Report</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/pivottotale" class="framework-navigation">
+                                <span class="glyphicons glyphicons-stats"></span>
+                                <span class="sidebar-title">Analisi</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/riepilogototale" class="framework-navigation">
+                                <span class="glyphicons glyphicons-pie_chart"></span>
+                                <span class="sidebar-title">Riepilogo</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
             #end
 
+            <script>
+                $(document).ready(function(){
+                    var btnStampaCompleta = $('<div class="col-md-12 col-xs-12 margin-bottom-10 p0 complete-print" title="" data-placement="top" data-toggle="tooltip" data-original-title="[data-toggle="tooltip"]">'+
+                            '<button class="btn btn-primary full-width complete-print-btn" type="button">'+
+                            '<span class="glyphicon glyphicon-print" aria-hidden="true"></span>'+
+                            '</button>'+
+                            '</div>');
 
-
-
-
-        ##report  categoria
-            #if ($roleid ==3  ||
-                $roleid == 4 )
-                <li>
-                    <a href="#/reportiscritti" class="framework-navigation">
-                        <span class="fa fa-bar-chart-o"></span>
-                        <span class="sidebar-title">Report iscritti</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#/reportdeleghe" class="framework-navigation">
-                        <span class="fa fa-bar-chart-o"></span>
-                        <span class="sidebar-title">Report deleghe</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#/reportiqa" class="framework-navigation">
-                        <span class="fa fa-bar-chart-o"></span>
-                        <span class="sidebar-title">Report quote</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#/reportdocumenti" class="framework-navigation">
-                        <span class="fa fa-bar-chart-o"></span>
-                        <span class="sidebar-title">Report documenti</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#/reportdocumentiazienda" class="framework-navigation">
-                        <span class="fa fa-bar-chart-o"></span>
-                        <span class="sidebar-title">Report documenti azienda</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#/reportcomunicazioni" class="framework-navigation">
-                        <span class="fa fa-bar-chart-o"></span>
-                        <span class="sidebar-title">Report comunicazioni</span>
-                    </a>
-                </li>
-            #end
-        ##report iscritti uil
-            #if ($roleid ==5 )
-                <li>
-                    <a href="#/reportiscritti" class="framework-navigation">
-                        <span class="fa fa-bar-chart-o"></span>
-                        <span class="sidebar-title">Report iscritti</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#/reportdeleghe" class="framework-navigation">
-                        <span class="fa fa-bar-chart-o"></span>
-                        <span class="sidebar-title">Report deleghe</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#/reportiqa" class="framework-navigation">
-                        <span class="fa fa-bar-chart-o"></span>
-                        <span class="sidebar-title">Report quote</span>
-                    </a>
-                </li>
-
-            #end
-        ##report unc
-            #if ($roleid ==6 )
-                <li>
-                    <a href="#/reportiscritti" class="framework-navigation">
-                        <span class="fa fa-bar-chart-o"></span>
-                        <span class="sidebar-title">Report iscritti</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#/reportdeleghe" class="framework-navigation">
-                        <span class="fa fa-bar-chart-o"></span>
-                        <span class="sidebar-title">Report deleghe</span>
-                    </a>
-                </li>
-            #end
+                    btnStampaCompleta.tooltip();
+                });
+            </script>
 
         ##configurazione
             #if ($roleid == 3) ##segretario regionale

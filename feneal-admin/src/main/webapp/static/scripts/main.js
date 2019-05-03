@@ -14,35 +14,37 @@ require([
     "aziende/aziendeController",
     "documenti/aziendaDocumentiController",
     "reports/reportIscrittiController",
-
     "reports/reportIncassiQuoteController",
     "reports/reportDelegheController",
     "reports/reportDocumentiController",
     "reports/reportDocumentiAziendaController",
     "reports/reportComunicazioniController",
-    
     "deleghe/delegheController",
-
-
     "quote/quoteImpiantiController",
     "documenti/documentiController",
-    
     "comunicazioni/comunicazioniController",
     "versamenti/versamentiController",
     "importazioneDB/importazioneController",
     "quote/quoteAssocController",  "framework/widgets","importData/importDataController",
     "analisi/analisiController",
-    "trace/traceController"], function(_p, core, ui, fviews, fcontrollers, fhelpers,
-                                                 controllers, usercontroller, 
-                                                 lavController, listeLavoroController, azController, azDocController,
-                                                 iscrittiReportController,
-                                                 iqaReportController,
-                                                 delController, docReportController, docAziendaReportController,
-                                                 commReportController,  delegheController,
-                                                   quoteImpiantiController,
-                                                 docController,   comController,
-                                       versController, importazController, quoteAssocController, fwidgets, importController,analisiController,
-                                       traceController) {
+    "trace/traceController",
+    "reports/reportProvenienzaUncController",
+    "reports/reportProvBilController",
+    "reports/reportTotalController"], function(
+        _p, core, ui, fviews, fcontrollers, fhelpers,
+        controllers, usercontroller,
+        lavController, listeLavoroController, azController, azDocController,
+        iscrittiReportController,
+        iqaReportController,
+        delController, docReportController, docAziendaReportController,
+        commReportController,  delegheController,
+        quoteImpiantiController,
+        docController,   comController,
+        versController, importazController, quoteAssocController, fwidgets, importController,analisiController,
+        traceController,
+        provenienzaReportController,
+        provBilReportController,
+        totadslReportController) {
 
     $.datepicker.setDefaults( $.datepicker.regional[ "IT" ] );
 
@@ -93,6 +95,38 @@ require([
 
 
 
+
+        //nuovi report
+        //creati dsa felice il 30/04/2019
+
+        //PROVENIENZA UNC
+        //report
+        ui.Navigation.instance().registerController("reportprovenienzaunc", function() { return new provenienzaReportController.ProvenienzaUncReportController(); }, "singleton");
+        //analisi
+        ui.Navigation.instance().registerController("pivotprovenienzaunc", function() { return new analisiController.PivotProvUncController(); }, "singleton");
+        //riepilogo
+        ui.Navigation.instance().registerController("riepilogoprovenienzaunc", function() { return new analisiController.RiepilogoProvUncController(); }, "singleton");
+
+
+
+        //PROVENIENZA BILATERALITA
+        //report
+        ui.Navigation.instance().registerController("reportprovenienzabilat", function() { return new provBilReportController.ProvBilReportController(); }, "singleton");
+        //analisi
+        ui.Navigation.instance().registerController("pivotprovenienzabilat", function() { return new analisiController.PivotProvBilController(); }, "singleton");
+        //riepilogo
+        ui.Navigation.instance().registerController("riepilogoprovenienzabilat", function() { return new analisiController.RiepilogoProvBilController(); }, "singleton");
+
+        //TOTALE
+        //report
+        ui.Navigation.instance().registerController("reporttotale", function () {return new totadslReportController.TotalReportController(); }, "singleton");
+        //analisi
+        ui.Navigation.instance().registerController("pivottotale", function() { return new analisiController.PivotTotController(); }, "singleton");
+        //riepilogo
+        ui.Navigation.instance().registerController("riepilogototale", function() { return new analisiController.RiepilogoTotController(); }, "singleton");
+
+
+
         //Percorsi deleghe
         ui.Navigation.instance().registerController("deleghehome", function() { return new delegheController.DelegheHomeController(); }, "singleton");
         ui.Navigation.instance().registerController("editdelega", function() { return new delegheController.EditDelegaController(); }, "singleton");
@@ -125,6 +159,17 @@ require([
         ui.Navigation.instance().registerController("importanagrafichegenerali", function() { return new importController.ImportaAnagraficheController(); }, "singleton");
         ui.Navigation.instance().registerController("importdeleghegenerali", function() { return new importController.ImportaDelegheController(); }, "singleton");
         ui.Navigation.instance().registerController("importquotegenerali", function() { return new importController.ImportaQuoteController(); }, "singleton");
+
+        //importazioni massive FELICE
+        ui.Navigation.instance().registerController("importdatiunc", function() { return new importController.ImportaDatiUncController(); }, "singleton");
+        ui.Navigation.instance().registerController("importdatibil", function() { return new importController.ImportaDatiBilController(); }, "singleton");
+
+
+
+
+
+
+
         ui.Navigation.instance().registerController("importdocumentigenerali", function() { return new importController.ImportaDocumentiController(); }, "singleton");
 
         ui.Navigation.instance().registerController("riepilogo", function() { return new analisiController.RiepilogoController(); }, "singleton");

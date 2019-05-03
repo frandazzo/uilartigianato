@@ -14,6 +14,7 @@ define([
 
 
     //questo controller gestisce la visualizzazione di un riepilogo dati del lavoratore
+    //ISCRITTI
     var RiepilogoController = fcontrollers.Controller.extend({
         ctor: function(){
             RiepilogoController.super.ctor.call(this);
@@ -30,8 +31,6 @@ define([
 
         }
     });
-
-
     var PivotController = fcontrollers.Controller.extend({
         ctor: function(){
             PivotController.super.ctor.call(this);
@@ -49,7 +48,7 @@ define([
         }
     });
 
-
+    //DELEGHE
     var PivotDelegheController = fcontrollers.Controller.extend({
         ctor: function(){
             PivotController.super.ctor.call(this);
@@ -66,7 +65,6 @@ define([
 
         }
     });
-
     var RiepilogoDelegheController = fcontrollers.Controller.extend({
         ctor: function(){
             RiepilogoController.super.ctor.call(this);
@@ -83,12 +81,127 @@ define([
 
         }
     });
-   
 
-  
+    //PROV UNC
+    var PivotProvUncController = fcontrollers.Controller.extend({
+        ctor: function(){
+            PivotProvUncController.super.ctor.call(this);
+        },
+        index: function(params) {
+
+
+            var url = BASE + "analisi/pivotprovunc";
+            var service = new fmodel.AjaxService();
+            service.set({
+                url: url
+            });
+            return new views.PivotProvUncRemoteView(service);
+
+        }
+    });
+    var RiepilogoProvUncController = fcontrollers.Controller.extend({
+        ctor: function(){
+            RiepilogoProvUncController.super.ctor.call(this);
+        },
+        index: function(params) {
+
+
+            var url = BASE + "analisi/riepilogoUnc";
+            var service = new fmodel.AjaxService();
+            service.set({
+                url: url
+            });
+            return new views.RiepilogoProvUncRemoteView(service);
+
+        }
+    });
+
+
+    //PROV BIL
+    var PivotProvBilController = fcontrollers.Controller.extend({
+        ctor: function(){
+            PivotProvBilController.super.ctor.call(this);
+        },
+        index: function(params) {
+
+
+            var url = BASE + "analisi/pivotprovbil";
+            var service = new fmodel.AjaxService();
+            service.set({
+                url: url
+            });
+            return new views.PivotProvBilRemoteView(service);
+
+        }
+    });
+    var RiepilogoProvBilController = fcontrollers.Controller.extend({
+        ctor: function(){
+            RiepilogoProvBilController.super.ctor.call(this);
+        },
+        index: function(params) {
+
+
+            var url = BASE + "analisi/riepilogoBil";
+            var service = new fmodel.AjaxService();
+            service.set({
+                url: url
+            });
+            return new views.RiepilogoPorvBilRemoteView(service);
+
+        }
+    });
+
+    //TOTALE
+    var PivotTotController = fcontrollers.Controller.extend({
+        ctor: function(){
+            PivotTotController.super.ctor.call(this);
+        },
+        index: function(params) {
+
+
+            var url = BASE + "analisi/pivottot";
+            var service = new fmodel.AjaxService();
+            service.set({
+                url: url
+            });
+            return new views.PivotTotRemoteView(service);
+
+        }
+    });
+    var RiepilogoTotController = fcontrollers.Controller.extend({
+        ctor: function(){
+            RiepilogoTotController.super.ctor.call(this);
+        },
+        index: function(params) {
+
+
+            var url = BASE + "analisi/riepilogoTot";
+            var service = new fmodel.AjaxService();
+            service.set({
+                url: url
+            });
+            return new views.RiepilogoTotRemoteView(service);
+
+        }
+    });
+
+
+
+
+
     exports.RiepilogoController = RiepilogoController;
     exports.PivotController = PivotController;
+
     exports.PivotDelegheController = PivotDelegheController;
     exports.RiepilogoDelegheController = RiepilogoDelegheController;
+
+    exports.PivotProvUncController = PivotProvUncController;
+    exports.RiepilogoProvUncController = RiepilogoProvUncController;
+
+    exports.PivotProvBilController = PivotProvBilController;
+    exports.RiepilogoProvBilController = RiepilogoProvBilController;
+
+    exports.PivotTotController = PivotTotController;
+    exports.RiepilogoTotController = RiepilogoTotController;
     return exports;
 });

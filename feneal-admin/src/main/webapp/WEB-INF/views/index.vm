@@ -65,7 +65,24 @@
                             <div class="alert alert-system alert-dismissable welcome-ok">
                                 <i class="fa fa-cubes pr10"></i>
                                 <span class="welcome-ok-str"></span>
-                                <strong>Benvenuto nell'applicativo Organizzativo Coordinamento UIL Artigianato</strong>
+                                <strong>Benvenuto nell&#39;applicativo UIL Artigianato!
+                                    <br>
+                                    <br>
+                                    Qui trovate:
+                                    <br>
+                                    <br>
+                                    <ul style="list-style-type:circle;">
+                                        <li>le deleghe, sottoscritte dai lavoratori del comparto, inserite dagli Operatori Intercategoriali UIL
+                                            Artigianato,</li>
+                                        <li>i dati relativi ai lavoratori iscritti direttamente dalle UNC ,</li>
+                                        <li>i nominativi di lavoratori contattati dalla UIL tramite la bilateralità di comparto.</li>
+                                    </ul>
+                                    <br>
+                                    Tutto ciò al fine di gestire le quote tessere di diretto incasso e, soprattutto, monitorare e dare una
+                                    dimensione della rappresentanza e della rappresentatività della UIL nel comparto dell’ Artigianato.
+                                    <br>
+                                    <br>
+                                    I dati possono essere aggregati in report, analisi e riepiloghi.</strong>
                             </div>
                         </div>
 

@@ -59,11 +59,6 @@ public class DelegheController {
 
 
 
-
-
-
-
-
     @RequestMapping(value = "deleghe/home/{workerId}", method = RequestMethod.GET)
     @PreAuthorize("isAuthenticated()")
     public
@@ -119,6 +114,7 @@ public class DelegheController {
         }
 
     }
+
     @RequestMapping(value = "delega/{id}", method = RequestMethod.GET)
     @PreAuthorize("isAuthenticated()")
     public
@@ -200,9 +196,6 @@ public class DelegheController {
     }
 
 
-
-
-
     @RequestMapping(value = "/delega/changeState/{newState}", method = RequestMethod.GET)
     @PreAuthorize("isAuthenticated()")
     public
@@ -257,6 +250,7 @@ public class DelegheController {
         }
 
     }
+
     @RequestMapping(value = "/delega/changeState", method = RequestMethod.POST)
     @PreAuthorize("isAuthenticated()")
     public @ResponseBody
@@ -286,10 +280,6 @@ public class DelegheController {
         }
 
     }
-
-
-
-
 
 
 

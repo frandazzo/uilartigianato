@@ -105,11 +105,60 @@ define([
 
     });
 
+    var ImportaDatiUncController = fcontrollers.Controller.extend({
+        ctor: function(){
+            ImportaDatiUncController.super.ctor.call(this);
+        },
+        index: function(params) {
+
+            var service = new fmodel.FormService();
+            service.set({
+                method: "GET",
+                url: BASE + "importDatiUnc/dati",
+                data: {}
+            });
+
+
+
+            var view = new views.ImportaDatiUncAppView(service);
+
+
+            return view;
+        }
+
+    });
+
+    var ImportaDatiBilController = fcontrollers.Controller.extend({
+        ctor: function(){
+            ImportaDatiBilController.super.ctor.call(this);
+        },
+        index: function(params) {
+
+            var service = new fmodel.FormService();
+            service.set({
+                method: "GET",
+                url: BASE + "importDatiBil/dati",
+                data: {}
+            });
+
+
+
+            var view = new views.ImportaDatiBilAppView(service);
+
+
+            return view;
+        }
+
+    });
+
+
 
     exports.ImportaDocumentiController = ImportaDocumentiController;
     exports.ImportaQuoteController = ImportaQuoteController;
     exports.ImportaDelegheController = ImportaDelegheController;
     exports.ImportaAnagraficheController = ImportaAnagraficheController;
+    exports.ImportaDatiUncController = ImportaDatiUncController;
+    exports.ImportaDatiBilController = ImportaDatiBilController;
 
 
     return exports;
