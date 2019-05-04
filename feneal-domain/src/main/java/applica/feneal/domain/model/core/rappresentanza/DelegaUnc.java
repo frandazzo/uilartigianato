@@ -14,6 +14,17 @@ public class DelegaUnc  extends SecuredDomainEntity {
     private Date cancelDate;
     //categoria della delega
     private Categoria sector;
+    //azienda del lavoratore
+    private Azienda workerCompany;
+
+    public Azienda getWorkerCompany() {
+        return workerCompany;
+    }
+
+    public void setWorkerCompany(Azienda workerCompany) {
+        this.workerCompany = workerCompany;
+    }
+
     //provincia di riferimento
     private Province province;
     //utente che hA sottoscritto la delega

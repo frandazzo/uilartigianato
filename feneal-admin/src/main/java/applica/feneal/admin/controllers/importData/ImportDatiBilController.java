@@ -142,7 +142,7 @@ public class ImportDatiBilController {
     SimpleResponse executeimportquote(HttpServletRequest request, HttpServletResponse response, @RequestBody ImportData file) {
 
         try{
-            String fileToDownload = "ciccio";//importDataService.importaQuote(file);
+            String fileToDownload = importDataService.importaBiolateralita(file);
 
             return new ValueResponse(fileToDownload);
         }catch(Exception ex){

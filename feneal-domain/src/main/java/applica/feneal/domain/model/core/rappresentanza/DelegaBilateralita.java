@@ -14,8 +14,7 @@ public class DelegaBilateralita extends SecuredDomainEntity {
     private Date cancelDate;
     //categoria della delega
     private Categoria sector;
-    //azienda del lavoratore
-    private Azienda workerCompany;
+
     //provincia di riferimento
     private Province province;
     //utente che hA sottoscritto la delega
@@ -46,13 +45,6 @@ public class DelegaBilateralita extends SecuredDomainEntity {
         this.sector = sector;
     }
 
-    public Azienda getWorkerCompany() {
-        return workerCompany;
-    }
-
-    public void setWorkerCompany(Azienda workerCompany) {
-        this.workerCompany = workerCompany;
-    }
 
     public Province getProvince() {
         return province;

@@ -6,6 +6,7 @@ package applica.feneal.domain.utils;
 public class Box {
     private Object value;
     private Object value1;
+    private Exception exception;
 
     public Object getValue1() {
         return value1;
@@ -21,5 +22,13 @@ public class Box {
 
     public void setValue(Object value) {
         this.value = value;
+    }
+
+    public void setException(Exception exception) {
+        this.exception = exception;
+    }
+
+    public Exception getException() {
+        return exception;
     }
 }

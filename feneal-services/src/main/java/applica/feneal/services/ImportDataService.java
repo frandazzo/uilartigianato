@@ -16,5 +16,9 @@ public interface ImportDataService {
 
 
 
+    String importaBiolateralita(ImportData file) throws Exception;
+
+    String importaUnc(ImportData file) throws Exception;
+
     String importaDocumenti(ImportData file) throws Exception;
 }

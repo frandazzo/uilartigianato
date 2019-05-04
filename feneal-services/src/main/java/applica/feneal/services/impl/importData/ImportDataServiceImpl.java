@@ -37,6 +37,9 @@ public class ImportDataServiceImpl implements ImportDataService {
     private ImportDataQuote importQuote;
 
     @Autowired
+    private ImportDataBilateralita_Unc importBil;
+
+    @Autowired
     private ImportDataUtils importDataUtils;
 
     @Autowired
@@ -127,6 +130,58 @@ public class ImportDataServiceImpl implements ImportDataService {
         return pathToFile;
     }
 
+    @Override
+    public String importaBiolateralita(ImportData file) throws Exception {
+        String user = ((User) sec.getLoggedUser()).getUsername();
+
+        //creo una cartella temporanea dove inserirò tutti i dati per fare l'analisi
+        File temp1 = File.createTempFile("import_quotebilateralita_" + user,"");
+        temp1.delete();
+        temp1.mkdir();
+        //creo una cartella corrante temporanea che alla fine sarà zippata
+        //e restituita
+        File temp = File.createTempFile("LogImportazioneQuoteBilateralita_" + user,"");
+        temp.delete();
+        temp.mkdir();
+
+        importBil.doImportBilateralita(file, temp1, temp);
+
+        String zippedFile = importDataUtils.compressData(temp);
+
+
+        //questa funxione restituiraà l'url della cartella zippata
+        //pertanto dovro' inviare tramite fileserver il file zippato
+        //al file server appunto
+        String pathToFile =  server.saveFile("files/importazioneQuoteBilateralita/", "zip", new FileInputStream(new File(zippedFile)));
+        return pathToFile;
+
+    }
+
+    @Override
+    public String importaUnc(ImportData file) throws Exception {
+        String user = ((User) sec.getLoggedUser()).getUsername();
+
+        //creo una cartella temporanea dove inserirò tutti i dati per fare l'analisi
+        File temp1 = File.createTempFile("import_quoteunc_" + user,"");
+        temp1.delete();
+        temp1.mkdir();
+        //creo una cartella corrante temporanea che alla fine sarà zippata
+        //e restituita
+        File temp = File.createTempFile("LogImportazioneQuoteunc_" + user,"");
+        temp.delete();
+        temp.mkdir();
+
+        importBil.doImportUnc(file, temp1, temp);
+
+        String zippedFile = importDataUtils.compressData(temp);
+
+
+        //questa funxione restituiraà l'url della cartella zippata
+        //pertanto dovro' inviare tramite fileserver il file zippato
+        //al file server appunto
+        String pathToFile =  server.saveFile("files/importazioneQuoteunc/", "zip", new FileInputStream(new File(zippedFile)));
+        return pathToFile;
+    }
 
 
     @Override

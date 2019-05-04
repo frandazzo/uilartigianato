@@ -4,7 +4,8 @@ package applica.feneal.admin.controllers;
 import applica.feneal.domain.model.User;
 import applica.feneal.domain.model.analisi.PivotanalisysData;
 import applica.feneal.domain.model.core.lavoratori.Lavoratore;
-import applica.feneal.services.StatisticService;
+
+import applica.feneal.services.StatisticsIscrittiService;
 import applica.framework.library.responses.ErrorResponse;
 import applica.framework.library.responses.SimpleResponse;
 import applica.framework.library.responses.ValueResponse;
@@ -36,7 +37,7 @@ public class AnalisiProvUncController {
     private Security sec;
 
     @Autowired
-    private StatisticService statServ;
+    private StatisticsIscrittiService statServ;
 
 
     @RequestMapping(value = "/esempioUNC",method = RequestMethod.GET)
