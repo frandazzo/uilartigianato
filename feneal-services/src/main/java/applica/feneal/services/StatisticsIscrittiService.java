@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by fgran on 01/05/2016.
  */
-public interface StatisticService {
+public interface StatisticsIscrittiService {
     Integer[] getAnniIscrizioni();
     IscrittiDescriptor getIscrittiPerCategoria(int anno, String region);
     IscrittiDescriptor getIscrittiPerAreaGeografica(int anno, String region);

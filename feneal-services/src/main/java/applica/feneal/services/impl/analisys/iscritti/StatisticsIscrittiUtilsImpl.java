@@ -1,4 +1,4 @@
-package applica.feneal.services.utils;
+package applica.feneal.services.impl.analisys.iscritti;
 
 
 import applica.feneal.domain.data.Command;
@@ -9,6 +9,7 @@ import applica.feneal.domain.model.analisi.IscrittiDescriptorItem;
 import applica.feneal.domain.model.analisi.LegendaFactory;
 import applica.feneal.domain.model.analisi.PivotanalisysData;
 import applica.feneal.domain.utils.Box;
+import applica.feneal.services.StatisticsIscrittiUtils;
 import applica.framework.security.Security;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.SQLQuery;
@@ -25,7 +26,7 @@ import java.util.List;
  * Created by fgran on 11/06/2016.
  */
 @Component
-public class StatisticsUtils {
+public class StatisticsIscrittiUtilsImpl implements StatisticsIscrittiUtils {
     @Autowired
     private DettaglioQuoteAssociativeRepository iscRep;
 
@@ -36,6 +37,7 @@ public class StatisticsUtils {
 
 
 
+    @Override
     public  List<Integer> getListaAnniIscrizioni(String regione, String categoria){
 
         final Box box = new Box();
@@ -108,6 +110,7 @@ public class StatisticsUtils {
 
     }
 
+    @Override
     public List<PivotanalisysData> getPivotAnalisysData(String regione, String categoria) {
 
 
@@ -204,6 +207,7 @@ public class StatisticsUtils {
 
 
 
+    @Override
     public IscrittiDescriptor getIscrittiPerCategoria_UtenteNazionale(int anno, String regionId){
 
         final Box box = new Box();
@@ -305,6 +309,7 @@ public class StatisticsUtils {
 
     }
 
+    @Override
     public IscrittiDescriptor getIscrittiPerCategoria_UtenteRegionale(int anno, String regionId){
 
         final Box box = new Box();
@@ -397,6 +402,7 @@ public class StatisticsUtils {
 
     }
 
+    @Override
     public IscrittiDescriptor getIscrittiPerAreaGeografica_UtenteNazionale(int anno, String regionId){
 
         final Box box = new Box();
@@ -509,6 +515,7 @@ public class StatisticsUtils {
 
     }
 
+    @Override
     public IscrittiDescriptor getIscrittiPerAreaGeografica_UtenteRegionale(int anno, String regionId){
 
         final Box box = new Box();
@@ -601,6 +608,7 @@ public class StatisticsUtils {
     }
 
 
+    @Override
     public IscrittiDescriptor getIscrittiPerAreaGeografica_UtenteCategoria(int anno, String regionId, String categoryId){
 
         final Box box = new Box();

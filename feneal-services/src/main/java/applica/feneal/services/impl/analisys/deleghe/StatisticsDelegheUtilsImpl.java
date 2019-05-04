@@ -1,4 +1,4 @@
-package applica.feneal.services.utils;
+package applica.feneal.services.impl.analisys.deleghe;
 
 import applica.feneal.domain.data.Command;
 import applica.feneal.domain.data.core.configuration.CategoriaRepository;
@@ -12,6 +12,7 @@ import applica.feneal.domain.model.core.configuration.Categoria;
 import applica.feneal.domain.model.geo.Region;
 import applica.feneal.domain.utils.Box;
 import applica.feneal.services.GeoService;
+import applica.feneal.services.StatisticsDelegheUtils;
 import applica.framework.LoadRequest;
 import applica.framework.security.Security;
 import org.apache.commons.lang3.StringUtils;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class StatisticsDelegheUtils {
+public class StatisticsDelegheUtilsImpl implements StatisticsDelegheUtils {
     @Autowired
     private DettaglioQuoteAssociativeRepository iscRep;
 
@@ -48,8 +49,7 @@ public class StatisticsDelegheUtils {
         return geoSvc.getREgionByName(regionName);
     }
 
-
-
+    @Override
     public List<Integer> getListaAnniIscrizioni(String regione, String categoria){
 
         Region region = findRegionByName(regione);
@@ -121,6 +121,7 @@ public class StatisticsDelegheUtils {
 
     }
 
+    @Override
     public List<PivotanalisysData> getPivotAnalisysData(String regione, String categoria) {
 
 
@@ -216,8 +217,7 @@ public class StatisticsDelegheUtils {
     }
 
 
-
-
+    @Override
     public IscrittiDescriptor getIscrittiPerCategoria_UtenteNazionale(int anno, String regionId){
 
         final Box box = new Box();
@@ -304,6 +304,7 @@ public class StatisticsDelegheUtils {
 
     }
 
+    @Override
     public IscrittiDescriptor getIscrittiPerCategoria_UtenteRegionale(int anno, String regionId){
 
         final Box box = new Box();
@@ -389,6 +390,7 @@ public class StatisticsDelegheUtils {
 
     }
 
+    @Override
     public IscrittiDescriptor getIscrittiPerAreaGeografica_UtenteNazionale(int anno, String regionId){
 
         final Box box = new Box();
@@ -492,6 +494,7 @@ public class StatisticsDelegheUtils {
 
     }
 
+    @Override
     public IscrittiDescriptor getIscrittiPerAreaGeografica_UtenteRegionale(int anno, String regionId){
 
         final Box box = new Box();
@@ -583,6 +586,7 @@ public class StatisticsDelegheUtils {
     }
 
 
+    @Override
     public IscrittiDescriptor getIscrittiPerAreaGeografica_UtenteCategoria(int anno, String regionId, String categoryId){
 
         final Box box = new Box();

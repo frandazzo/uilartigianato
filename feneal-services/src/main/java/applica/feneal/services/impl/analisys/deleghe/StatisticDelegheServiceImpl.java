@@ -1,12 +1,9 @@
-package applica.feneal.services.impl.report;
-
+package applica.feneal.services.impl.analisys.deleghe;
 
 import applica.feneal.domain.model.User;
 import applica.feneal.domain.model.analisi.IscrittiDescriptor;
 import applica.feneal.domain.model.analisi.PivotanalisysData;
-import applica.feneal.services.GeoService;
-import applica.feneal.services.StatisticService;
-import applica.feneal.services.utils.StatisticsUtils;
+import applica.feneal.services.StatisticDelegheService;
 import applica.framework.security.Security;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +11,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by fgran on 01/05/2016.
- */
 @Service
-public class StatisticServiceImpl implements StatisticService {
-
+public class StatisticDelegheServiceImpl implements StatisticDelegheService {
     @Autowired
     private Security sec;
 
     @Autowired
-    private StatisticsUtils utils;
+    private StatisticsDelegheUtilsImpl utils;
 
-    @Autowired
-    private GeoService geo;
+
 
 
 
@@ -130,3 +122,4 @@ public class StatisticServiceImpl implements StatisticService {
 
 
 }
+
