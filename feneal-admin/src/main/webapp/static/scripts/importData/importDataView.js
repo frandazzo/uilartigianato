@@ -24,6 +24,18 @@ define([
             var svc =  this.__createService(true, route, reportData);
             return svc;
         },
+        executeReportBilateralita: function(reportData){
+            var route = BASE + "importDatiBil/importquote" ;
+
+            var svc =  this.__createService(true, route, reportData);
+            return svc;
+        },
+        executeReportUnc: function(reportData){
+            var route = BASE + "importDatiUnc/importquote" ;
+
+            var svc =  this.__createService(true, route, reportData);
+            return svc;
+        },
         executeReportQuote: function(reportData){
             var route = BASE + "import/importquote" ;
 
@@ -813,7 +825,7 @@ define([
 
 
                 var factory = new RepositoryServiceFactory();
-                var svc = factory.executeReportQuote(data);
+                var svc = factory.executeReportUnc(data);
 
 
                 svc.on("load", function(response){
@@ -864,37 +876,7 @@ define([
             var result = {};
             result.errors = [];
 
-            //devo verificare se il settore è un settore edile oppure un qualunque altro settore
-            //se si tratta di settore edile devo valorizzare l'ente
-            if (data.settore == "EDILE"){
-                if (data.ente == ""){
-                    result.errors.push(
-                        {
-                            property: "ente",
-                            message: "Ente bilaterale mancante"
-                        }
-                    );
-                }
-            }
 
-            //devo valorizzare le date di inizio e fine
-            var dateRegExp = /^\d{2}[/]\d{2}[/]\d{4}$/
-            if (!data.dataInizio.match(dateRegExp)){
-                result.errors.push(
-                    {
-                        property: "dataInizio",
-                        message: "Data inizio non corretta (inserire data in formato dd/MM/yyyy)"
-                    }
-                );
-            }
-            if (!data.dataFine.match(dateRegExp)){
-                result.errors.push(
-                    {
-                        property: "dataFine",
-                        message: "Data fine non corretta (inserire data in formato dd/MM/yyyy)"
-                    }
-                );
-            }
 
             if (!data.file1){
                 result.errors.push(
@@ -1100,7 +1082,7 @@ define([
 
 
                 var factory = new RepositoryServiceFactory();
-                var svc = factory.executeReportQuote(data);
+                var svc = factory.executeReportBilateralita(data);
 
 
                 svc.on("load", function(response){
@@ -1151,37 +1133,6 @@ define([
             var result = {};
             result.errors = [];
 
-            //devo verificare se il settore è un settore edile oppure un qualunque altro settore
-            //se si tratta di settore edile devo valorizzare l'ente
-            if (data.settore == "EDILE"){
-                if (data.ente == ""){
-                    result.errors.push(
-                        {
-                            property: "ente",
-                            message: "Ente bilaterale mancante"
-                        }
-                    );
-                }
-            }
-
-            //devo valorizzare le date di inizio e fine
-            var dateRegExp = /^\d{2}[/]\d{2}[/]\d{4}$/
-            if (!data.dataInizio.match(dateRegExp)){
-                result.errors.push(
-                    {
-                        property: "dataInizio",
-                        message: "Data inizio non corretta (inserire data in formato dd/MM/yyyy)"
-                    }
-                );
-            }
-            if (!data.dataFine.match(dateRegExp)){
-                result.errors.push(
-                    {
-                        property: "dataFine",
-                        message: "Data fine non corretta (inserire data in formato dd/MM/yyyy)"
-                    }
-                );
-            }
 
             if (!data.file1){
                 result.errors.push(

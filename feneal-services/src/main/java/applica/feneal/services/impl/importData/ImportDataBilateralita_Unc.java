@@ -188,7 +188,8 @@ public class ImportDataBilateralita_Unc {
         Province pp = geo.getProvinceById(Integer.parseInt(importData.getProvince()));
         d.setProvince(pp);
         d.setCompanyId(Long.parseLong(importData.getCompany()));
-
+        d.setDocumentDate(dataInizio);
+        d.setCancelDate(dataFine);
         Azienda az = cache.getAziende().get(rowData.getData().get("Azienda"));
         d.setWorkerCompany(az);
 
@@ -255,6 +256,8 @@ public class ImportDataBilateralita_Unc {
         Province pp = geo.getProvinceById(Integer.parseInt(importData.getProvince()));
         d.setProvince(pp);
         d.setCompanyId(Long.parseLong(importData.getCompany()));
+        d.setDocumentDate(dataInizio);
+        d.setCancelDate(dataFine);
     }
 
     private DelegaBilateralita createOrGetIfExistBilateralita(Lavoratore lav, long companyId) {
@@ -503,7 +506,7 @@ public class ImportDataBilateralita_Unc {
             template.add("Indirizzo");
             template.add("Cap");
             template.add("Comune");
-            template.add("CAP");
+            template.add("Cap");
             template.add("Telefono");
             template.add("Email");
             template.add("Categoria");
