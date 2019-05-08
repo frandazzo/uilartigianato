@@ -1,5 +1,7 @@
 package applica.feneal.domain.model.analisi;
 
+import java.util.List;
+
 /**
  * Created by fgran on 03/01/2018.
  */
@@ -21,5 +23,18 @@ public class IscrittiDescriptorItem {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public IscrittiDescriptorItem add(List<IscrittiDescriptorItem> iscritti) {
+        IscrittiDescriptorItem result = new IscrittiDescriptorItem();
+        for (IscrittiDescriptorItem iscrittiDescriptorItem : iscritti) {
+            if (label.equals(iscrittiDescriptorItem.getLabel())){
+                result.setLabel(label);
+                result.setTotal(total + iscrittiDescriptorItem.getTotal());
+                return result;
+            }
+
+        }
+        return null;
     }
 }

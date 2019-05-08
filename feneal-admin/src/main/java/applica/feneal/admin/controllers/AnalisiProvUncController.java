@@ -5,6 +5,7 @@ import applica.feneal.domain.model.User;
 import applica.feneal.domain.model.analisi.PivotanalisysData;
 import applica.feneal.domain.model.core.lavoratori.Lavoratore;
 
+import applica.feneal.services.StatisticsDelegheAbstractService;
 import applica.feneal.services.StatisticsIscrittiService;
 import applica.framework.library.responses.ErrorResponse;
 import applica.framework.library.responses.SimpleResponse;
@@ -37,23 +38,10 @@ public class AnalisiProvUncController {
     private Security sec;
 
     @Autowired
-    private StatisticsIscrittiService statServ;
-
-
-    @RequestMapping(value = "/esempioUNC",method = RequestMethod.GET)
-    public @ResponseBody SimpleResponse createExample() throws Exception {
-        Lavoratore lav = new Lavoratore();
-        lav.setName("ciccillo");
-        lav.setSurname("randazzino");
-        lav.setAddress("c.da serra d'alto");
-        lav.setLivingCity("Matera");
-        lav.setCellphone("3385269726");
-        lav.setMail("fg.randazzo@hotmail.it");
+    private StatisticsDelegheAbstractService statServ;
 
 
 
-        return new ValueResponse(lav);
-    }
 
     @RequestMapping(value = "/analisi/riepilogoUnc",method = RequestMethod.GET)
     @PreAuthorize("isAuthenticated()")
@@ -120,12 +108,12 @@ public class AnalisiProvUncController {
 
             if (u.getCompany().getTipoConfederazione() == 1){
                 //sono un regionale
-                data =  statServ.getPivotAnalisysData(u.getCompany().getDescription(), "");
+                data =  statServ.getPivotAnalisysData(u.getCompany().getDescription(), "","fenealweb_delega_unc");
             }else if (u.getCompany().getTipoConfederazione() == 2){
                 //sono un nazionale
-                data =  statServ.getPivotAnalisysData("", "");
+                data =  statServ.getPivotAnalisysData("", "","fenealweb_delega_unc");
             }else{
-                data = statServ.getPivotAnalisysData("", u.getCategory().getDescription());
+                data = statServ.getPivotAnalisysData("", u.getCategory().getDescription(),"fenealweb_delega_unc");
             }
 
 
@@ -150,7 +138,7 @@ public class AnalisiProvUncController {
             if (region != null)
                 if (region.equals("noregion"))
                     region = "";
-            return new ValueResponse(statServ.getIscrittiPerCategoria(year, region));
+            return new ValueResponse(statServ.getIscrittiPerCategoria(year, region,"fenealweb_delega_unc"));
         } catch(Exception e) {
             e.printStackTrace();
             return new ErrorResponse(e.getMessage());
@@ -167,7 +155,7 @@ public class AnalisiProvUncController {
             if (region != null)
                 if (region.equals("noregion"))
                     region = "";
-            return new ValueResponse(statServ.getIscrittiPerAreaGeografica(year, region));
+            return new ValueResponse(statServ.getIscrittiPerAreaGeografica(year, region,"fenealweb_delega_unc"));
         } catch(Exception e) {
             e.printStackTrace();
             return new ErrorResponse(e.getMessage());
@@ -181,7 +169,7 @@ public class AnalisiProvUncController {
 
         try {
 
-            return new ValueResponse(statServ.getAnniIscrizioni());
+            return new ValueResponse(statServ.getAnniIscrizioni("fenealweb_delega_unc"));
         } catch(Exception e) {
             e.printStackTrace();
             return new ErrorResponse(e.getMessage());

@@ -5,6 +5,7 @@ import applica.feneal.domain.model.User;
 import applica.feneal.domain.model.analisi.PivotanalisysData;
 import applica.feneal.domain.model.core.lavoratori.Lavoratore;
 
+import applica.feneal.services.StatisticsDelegheAbstractService;
 import applica.feneal.services.StatisticsIscrittiService;
 import applica.framework.library.responses.ErrorResponse;
 import applica.framework.library.responses.SimpleResponse;
@@ -39,23 +40,9 @@ public class AnalisiProvBilController {
 
 
     @Autowired
-    private StatisticsIscrittiService statServ;
+    private StatisticsDelegheAbstractService statServ;
 
 
-    @RequestMapping(value = "/esempioBil",method = RequestMethod.GET)
-    public @ResponseBody SimpleResponse createExample() throws Exception {
-        Lavoratore lav = new Lavoratore();
-        lav.setName("ciccillo");
-        lav.setSurname("randazzino");
-        lav.setAddress("c.da serra d'alto");
-        lav.setLivingCity("Matera");
-        lav.setCellphone("3385269726");
-        lav.setMail("fg.randazzo@hotmail.it");
-
-
-
-        return new ValueResponse(lav);
-    }
 
     @RequestMapping(value = "/analisi/riepilogoBil",method = RequestMethod.GET)
     @PreAuthorize("isAuthenticated()")
@@ -122,12 +109,12 @@ public class AnalisiProvBilController {
 
             if (u.getCompany().getTipoConfederazione() == 1){
                 //sono un regionale
-                data =  statServ.getPivotAnalisysData(u.getCompany().getDescription(), "");
+                data =  statServ.getPivotAnalisysData(u.getCompany().getDescription(), "", "fenealweb_delega_bilateralita");
             }else if (u.getCompany().getTipoConfederazione() == 2){
                 //sono un nazionale
-                data =  statServ.getPivotAnalisysData("", "");
+                data =  statServ.getPivotAnalisysData("", "","fenealweb_delega_bilateralita");
             }else{
-                data = statServ.getPivotAnalisysData("", u.getCategory().getDescription());
+                data = statServ.getPivotAnalisysData("", u.getCategory().getDescription(),"fenealweb_delega_bilateralita");
             }
 
 
@@ -152,7 +139,7 @@ public class AnalisiProvBilController {
             if (region != null)
                 if (region.equals("noregion"))
                     region = "";
-            return new ValueResponse(statServ.getIscrittiPerCategoria(year, region));
+            return new ValueResponse(statServ.getIscrittiPerCategoria(year, region,"fenealweb_delega_bilateralita"));
         } catch(Exception e) {
             e.printStackTrace();
             return new ErrorResponse(e.getMessage());
@@ -169,7 +156,7 @@ public class AnalisiProvBilController {
             if (region != null)
                 if (region.equals("noregion"))
                     region = "";
-            return new ValueResponse(statServ.getIscrittiPerAreaGeografica(year, region));
+            return new ValueResponse(statServ.getIscrittiPerAreaGeografica(year, region,"fenealweb_delega_bilateralita"));
         } catch(Exception e) {
             e.printStackTrace();
             return new ErrorResponse(e.getMessage());
@@ -183,7 +170,7 @@ public class AnalisiProvBilController {
 
         try {
 
-            return new ValueResponse(statServ.getAnniIscrizioni());
+            return new ValueResponse(statServ.getAnniIscrizioni("fenealweb_delega_bilateralita"));
         } catch(Exception e) {
             e.printStackTrace();
             return new ErrorResponse(e.getMessage());

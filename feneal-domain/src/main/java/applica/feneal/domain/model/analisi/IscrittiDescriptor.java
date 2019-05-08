@@ -1,5 +1,6 @@
 package applica.feneal.domain.model.analisi;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,5 +26,20 @@ public class IscrittiDescriptor {
 
     public void setIscritti(List<IscrittiDescriptorItem> iscritti) {
         this.iscritti = iscritti;
+    }
+
+    public IscrittiDescriptor add(IscrittiDescriptor delegheBil) {
+        IscrittiDescriptor result = new IscrittiDescriptor();
+        result.setLegenda(legenda);
+
+        result.setIscritti(new ArrayList<>());
+
+        for (IscrittiDescriptorItem iscrittiDescriptorItem : iscritti) {
+            IscrittiDescriptorItem r = iscrittiDescriptorItem.add(delegheBil.iscritti);
+            if (r != null)
+                result.getIscritti().add(r);
+        }
+
+        return result;
     }
 }

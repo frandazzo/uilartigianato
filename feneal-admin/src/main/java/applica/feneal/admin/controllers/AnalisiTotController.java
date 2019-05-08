@@ -1,6 +1,7 @@
 package applica.feneal.admin.controllers;
 
 
+import applica.feneal.admin.facade.StatisticsDelegheFacade;
 import applica.feneal.domain.model.User;
 import applica.feneal.domain.model.analisi.PivotanalisysData;
 import applica.feneal.domain.model.core.lavoratori.Lavoratore;
@@ -39,23 +40,10 @@ public class AnalisiTotController {
 
 
     @Autowired
-    private StatisticsIscrittiService statServ;
-
-
-    @RequestMapping(value = "/esempioTot",method = RequestMethod.GET)
-    public @ResponseBody SimpleResponse createExample() throws Exception {
-        Lavoratore lav = new Lavoratore();
-        lav.setName("ciccillo");
-        lav.setSurname("randazzino");
-        lav.setAddress("c.da serra d'alto");
-        lav.setLivingCity("Matera");
-        lav.setCellphone("3385269726");
-        lav.setMail("fg.randazzo@hotmail.it");
+    private StatisticsDelegheFacade statServ;
 
 
 
-        return new ValueResponse(lav);
-    }
 
     @RequestMapping(value = "/analisi/riepilogoTot",method = RequestMethod.GET)
     @PreAuthorize("isAuthenticated()")
