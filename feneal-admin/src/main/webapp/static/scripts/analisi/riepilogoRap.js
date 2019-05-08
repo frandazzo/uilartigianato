@@ -183,7 +183,7 @@ define(["analisi/riepilogoRapData"
         
         
         var indexes = $.map(objects, function(obj, index) {
-            if(obj.label === transcodedMapId) {
+            if(obj.label.toUpperCase() === transcodedMapId) {
                 return index;
             }
         });

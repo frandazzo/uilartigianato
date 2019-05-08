@@ -84,7 +84,7 @@ public class StatisticsDelegheUtilsImpl implements StatisticsDelegheUtils {
                             "(select  distinct Year( documentDate) as Anno from fenealweb_delega d \n" +
                             "inner join tb_provincie p on d.provinceId = p.ID\n" +
                             "inner join uilweb_categorias c on d.sectorId = c.id \n" +
-                            "inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state < 5" + categoryWhere + regionWhere + " )\n" +
+                            "inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state < 8" + categoryWhere + regionWhere + " )\n" +
                             "as a order by Anno  desc";
                     SQLQuery query = query= s.createSQLQuery(sqlQuery).addScalar("Anno");
 
@@ -162,7 +162,7 @@ public class StatisticsDelegheUtilsImpl implements StatisticsDelegheUtils {
                             "   inner join fenealweb_lavoratore l on d.workerId = l.id\n" +
                             "   inner join tb_provincie p on d.provinceId = p.ID\n" +
                             "   inner join uilweb_categorias c on d.sectorId = c.id \n" +
-                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <5 " + regionWhere + categoryWhere;
+                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <8 " + regionWhere + categoryWhere;
 
 
                     SQLQuery query = null;
@@ -256,7 +256,7 @@ public class StatisticsDelegheUtilsImpl implements StatisticsDelegheUtils {
                             "   inner join fenealweb_lavoratore l on d.workerId = l.id\n" +
                             "   inner join tb_provincie p on d.provinceId = p.ID\n" +
                             "   inner join uilweb_categorias c on d.sectorId = c.id \n" +
-                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <5) as a\n" +
+                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <8) as a\n" +
                             "where anno = " +  anno + regionWhere + "\n" +
                             "group by a.Settore";
 
@@ -344,7 +344,7 @@ public class StatisticsDelegheUtilsImpl implements StatisticsDelegheUtils {
                             "   inner join fenealweb_lavoratore l on d.workerId = l.id\n" +
                             "   inner join tb_provincie p on d.provinceId = p.ID\n" +
                             "   inner join uilweb_categorias c on d.sectorId = c.id \n" +
-                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <5) as a\n" +
+                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <8) as a\n" +
                             "where anno = " +  anno + regionWhere + "\n" +
                             "group by a.Settore";
 
@@ -428,7 +428,7 @@ public class StatisticsDelegheUtilsImpl implements StatisticsDelegheUtils {
                             "   inner join fenealweb_lavoratore l on d.workerId = l.id\n" +
                             "   inner join tb_provincie p on d.provinceId = p.ID\n" +
                             "   inner join uilweb_categorias c on d.sectorId = c.id \n" +
-                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <5) as a\n" +
+                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <8) as a\n" +
                             "where anno = " +  anno + regionWhere + "\n" +
                             "group by a.Provincia";
 
@@ -444,7 +444,7 @@ public class StatisticsDelegheUtilsImpl implements StatisticsDelegheUtils {
                             "   inner join fenealweb_lavoratore l on d.workerId = l.id\n" +
                             "   inner join tb_provincie p on d.provinceId = p.ID\n" +
                             "   inner join uilweb_categorias c on d.sectorId = c.id \n" +
-                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <5) as a\n" +
+                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <8) as a\n" +
                             "where anno = " +  anno  + "\n" +
                             "group by a.Regione";
 
@@ -539,7 +539,7 @@ public class StatisticsDelegheUtilsImpl implements StatisticsDelegheUtils {
                             "   inner join fenealweb_lavoratore l on d.workerId = l.id\n" +
                             "   inner join tb_provincie p on d.provinceId = p.ID\n" +
                             "   inner join uilweb_categorias c on d.sectorId = c.id \n" +
-                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <5) as a\n" +
+                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <8) as a\n" +
                             "where anno = " +  anno + regionWhere + "\n" +
                             "group by a.Provincia";;
 
@@ -627,7 +627,7 @@ public class StatisticsDelegheUtilsImpl implements StatisticsDelegheUtils {
                             "   inner join fenealweb_lavoratore l on d.workerId = l.id\n" +
                             "   inner join tb_provincie p on d.provinceId = p.ID\n" +
                             "   inner join uilweb_categorias c on d.sectorId = c.id \n" +
-                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <5) as a\n" +
+                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <8) as a\n" +
                             "where anno = " +  anno + categoryWhere + regionWhere  + "\n" +
                             "group by a.Provincia";
 
@@ -643,7 +643,7 @@ public class StatisticsDelegheUtilsImpl implements StatisticsDelegheUtils {
                             "   inner join fenealweb_lavoratore l on d.workerId = l.id\n" +
                             "   inner join tb_provincie p on d.provinceId = p.ID\n" +
                             "   inner join uilweb_categorias c on d.sectorId = c.id \n" +
-                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <5) as a\n" +
+                            "   inner join tb_regioni r on r.ID = p.ID_TB_REGIONI where d.state <8) as a\n" +
                             "where anno = " +  anno + categoryWhere   + "\n" +
                             "group by a.Regione";
 

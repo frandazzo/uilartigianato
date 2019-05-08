@@ -78,7 +78,7 @@ define(["analisi/riepilogoTotData"
                         { dataField: "regione", area: "row",  sortOrder: "desc" },
                         // { dataField: "categoria", area: "filter",  sortOrder: "desc" },
                         { dataField: "provincia", area: "filter",  sortOrder: "desc" },
-                        { dataField: "nazionalita", area: "filter",  sortOrder: "desc" },
+                        { dataField: "nazionalita", caption: "Tipo delega", area: "filter",  sortOrder: "desc" },
                         { dataField: "settore", area: "filter",  sortOrder: "desc" },
                         { dataField: "id_Lavoratore", caption: "Num. Lavoratori", summaryType: "count", area: "data" }
                     ],

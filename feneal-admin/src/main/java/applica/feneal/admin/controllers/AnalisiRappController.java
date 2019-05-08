@@ -109,12 +109,12 @@ public class AnalisiRappController {
 
             if (u.getCompany().getTipoConfederazione() == 1){
                 //sono un regionale
-                data =  statServ.getPivotAnalisysData(u.getCompany().getDescription(), "", "fenealweb_delega_bilateralita");
+                data =  statServ.getPivotAnalisysData(u.getCompany().getDescription(), "", "fenealweb_delega");
             }else if (u.getCompany().getTipoConfederazione() == 2){
                 //sono un nazionale
-                data =  statServ.getPivotAnalisysData("", "","fenealweb_delega_bilateralita");
+                data =  statServ.getPivotAnalisysData("", "","fenealweb_delega");
             }else{
-                data = statServ.getPivotAnalisysData("", u.getCategory().getDescription(),"fenealweb_delega_bilateralita");
+                data = statServ.getPivotAnalisysData("", u.getCategory().getDescription(),"fenealweb_delega");
             }
 
 
@@ -139,7 +139,7 @@ public class AnalisiRappController {
             if (region != null)
                 if (region.equals("noregion"))
                     region = "";
-            return new ValueResponse(statServ.getIscrittiPerCategoria(year, region,"fenealweb_delega_bilateralita"));
+            return new ValueResponse(statServ.getIscrittiPerCategoria(year, region,"fenealweb_delega"));
         } catch(Exception e) {
             e.printStackTrace();
             return new ErrorResponse(e.getMessage());
@@ -156,7 +156,7 @@ public class AnalisiRappController {
             if (region != null)
                 if (region.equals("noregion"))
                     region = "";
-            return new ValueResponse(statServ.getIscrittiPerAreaGeografica(year, region,"fenealweb_delega_bilateralita"));
+            return new ValueResponse(statServ.getIscrittiPerAreaGeografica(year, region,"fenealweb_delega"));
         } catch(Exception e) {
             e.printStackTrace();
             return new ErrorResponse(e.getMessage());
@@ -170,7 +170,7 @@ public class AnalisiRappController {
 
         try {
 
-            return new ValueResponse(statServ.getAnniIscrizioni("fenealweb_delega_bilateralita"));
+            return new ValueResponse(statServ.getAnniIscrizioni("fenealweb_delega"));
         } catch(Exception e) {
             e.printStackTrace();
             return new ErrorResponse(e.getMessage());

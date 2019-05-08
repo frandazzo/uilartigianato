@@ -20,8 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 @Component
 public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbstractUtils {
 
@@ -45,6 +45,13 @@ public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbst
             if (existRecord(regione, categoria,tipoEntita,anno))
                 result.add(anno);
         }
+
+        Collections.sort(result, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2)*-1;
+            }
+        });
 
         return result;
 
