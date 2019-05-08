@@ -1,6 +1,7 @@
 package applica.feneal.domain.model.analisi;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 /**
@@ -34,11 +35,33 @@ public class IscrittiDescriptor {
 
         result.setIscritti(new ArrayList<>());
 
+
+        //metto in una hash ttute l'unione di tutte le voci della lista di partenza e quella di arrivo
+        Hashtable<String, Integer> v = new Hashtable<>();
         for (IscrittiDescriptorItem iscrittiDescriptorItem : iscritti) {
-            IscrittiDescriptorItem r = iscrittiDescriptorItem.add(delegheBil.iscritti);
-            if (r != null)
-                result.getIscritti().add(r);
+            v.put(iscrittiDescriptorItem.getLabel(), iscrittiDescriptorItem.getTotal());
         }
+
+        for (IscrittiDescriptorItem iscrittiDescriptorItem : delegheBil.getIscritti()) {
+            if (!v.containsKey(iscrittiDescriptorItem.getLabel()))
+                v.put(iscrittiDescriptorItem.getLabel(), iscrittiDescriptorItem.getTotal());
+            else{
+                int oldvalue = v.get(iscrittiDescriptorItem.getLabel());
+                int valueToAdd = iscrittiDescriptorItem.getTotal();
+                v.put(iscrittiDescriptorItem.getLabel(), oldvalue + valueToAdd);
+
+            }
+        }
+
+        //ciclo su tute le key della hashmap e creo un itemDescriptr....
+        for (String label : v.keySet()) {
+            IscrittiDescriptorItem item = new IscrittiDescriptorItem();
+            item.setLabel(label);
+            item.setTotal(v.get(label));
+            result.getIscritti().add(item);
+        }
+
+
 
         return result;
     }

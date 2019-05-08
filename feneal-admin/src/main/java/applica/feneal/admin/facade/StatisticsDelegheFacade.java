@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class StatisticsDelegheFacade {
@@ -67,10 +68,10 @@ public class StatisticsDelegheFacade {
         Integer[] delegheUnc = statServ.getAnniIscrizioni("fenealweb_delega_unc");
 
         MergeRemoveDupSort d = new MergeRemoveDupSort();
-        Integer[] delegheresult = d.mergeRemoveDupSortIt(deleghe, delegheBil);
+       Integer[] delegheresult = d.mergeRemoveDupSortIt(deleghe, delegheBil);
 
-        Integer[] delegheFinal = d.mergeRemoveDupSortIt(delegheresult,delegheUnc);
+        return Arrays.stream(d.mergeRemoveDupSortIt(delegheresult,delegheUnc)).distinct().collect(Collectors.toList());
 
-        return new ArrayList<>(Arrays.asList(delegheFinal));
+
     }
 }
