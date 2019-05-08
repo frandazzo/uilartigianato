@@ -102,7 +102,7 @@ define(["analisi/riepilogoData"
                     maxZoomFactor: 50,
                     center: [15, 42],
                     title: {
-                        text: "<b>Iscritti UIL Italia</b>",
+                        text: "<b>Riepilogo Iscritti</b>",
                         subtitle: "anno " + year
                     },
                     controlBar: {

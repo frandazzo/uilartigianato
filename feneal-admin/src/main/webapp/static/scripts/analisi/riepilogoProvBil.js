@@ -99,7 +99,7 @@ define(["analisi/riepilogoProvBilData"
                     maxZoomFactor: 50,
                     center: [15, 42],
                     title: {
-                        text: "<b>Iscritti UIL Italia</b>",
+                        text: "<b>Riepilogo Provenienza Bilateralità</b>",
                         subtitle: "anno " + year
                     },
                     controlBar: {

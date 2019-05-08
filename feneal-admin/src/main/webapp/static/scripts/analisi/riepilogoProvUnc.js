@@ -99,7 +99,7 @@ define(["analisi/riepilogoProvUncData"
                     maxZoomFactor: 50,
                     center: [15, 42],
                     title: {
-                        text: "<b>Iscritti UIL Italia</b>",
+                        text: "<b>Riepilogo Provenienza UNC</b>",
                         subtitle: "anno " + year
                     },
                     controlBar: {
