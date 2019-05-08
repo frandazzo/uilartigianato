@@ -892,6 +892,182 @@ define([
 
     });
 
+    //RAPPRESENTANZA
+    var PivotRapRemoteView = fviews.RemoteContentView.extend({
+        ctor: function(service){
+            PivotRapRemoteView.super.ctor.call(this, service);
+
+            var self = this;
+
+
+            this.on("load", function(){
+
+                //alert("data loaded");
+                //qui inserisco tutto il codice di inizializzazione della vista
+
+
+
+                self.createToolbar();
+                self.createBreadcrumbs();
+
+            });
+
+        },
+
+
+        onServiceLoad: function(html) {
+            var self = this;
+            $.loader.hide({ parent: this.container });
+
+            this.content = _E("div").html(html);
+            this.container.empty().append(this.content);
+
+
+            this.invoke("load");
+
+        },
+        createToolbar: function() {
+            var buttons = this.getToolbarButtons();
+
+            var $t = $("#toolbar");
+            if(!$t.toolbar("isToolbar")) {
+                $t.toolbar();
+            }
+
+            $t.toolbar("clear");
+            var size = buttons.length;
+            for(var i = 0; i < size; i++) {
+                var button = buttons[i];
+                $t.toolbar("add", button);
+            }
+        },
+        createBreadcrumbs: function() {
+            var items = this.getBreadcrumbItems();
+
+            var $b = $("#breadcrumbs");
+            if(!$b.breadcrumbs("isBreadcrumbs")) {
+                $b.breadcrumbs();
+            }
+
+            $b.breadcrumbs('clear');
+            $b.breadcrumbs('addAll', items);
+        },
+
+
+        getToolbarButtons: function() {
+            var self = this;
+
+            return [
+
+            ];
+
+        },
+        getBreadcrumbItems: function() {
+            var self = this;
+            return [
+                {
+                    pageTitle: "UIL Artigianato"
+                },
+                {
+                    icon: "glyphicon glyphicon-home",
+                    href: BASE
+                },
+                {
+                    label: "Analisi deleghe per rappresentanza",
+
+
+                }
+            ];
+        }
+
+    });
+    var RiepilogoRapRemoteView = fviews.RemoteContentView.extend({
+        ctor: function(service){
+            RiepilogoRapRemoteView.super.ctor.call(this, service);
+
+            var self = this;
+
+
+            this.on("load", function(){
+
+                //alert("data loaded");
+                //qui inserisco tutto il codice di inizializzazione della vista
+
+                self.createToolbar();
+                self.createBreadcrumbs();
+
+            });
+
+        },
+
+
+        onServiceLoad: function(html) {
+            var self = this;
+            $.loader.hide({ parent: this.container });
+
+            this.content = _E("div").html(html);
+            this.container.empty().append(this.content);
+
+
+            this.invoke("load");
+
+        },
+        createToolbar: function() {
+            var buttons = this.getToolbarButtons();
+
+            var $t = $("#toolbar");
+            if(!$t.toolbar("isToolbar")) {
+                $t.toolbar();
+            }
+
+            $t.toolbar("clear");
+            var size = buttons.length;
+            for(var i = 0; i < size; i++) {
+                var button = buttons[i];
+                $t.toolbar("add", button);
+            }
+        },
+        createBreadcrumbs: function() {
+            var items = this.getBreadcrumbItems();
+
+            var $b = $("#breadcrumbs");
+            if(!$b.breadcrumbs("isBreadcrumbs")) {
+                $b.breadcrumbs();
+            }
+
+            $b.breadcrumbs('clear');
+            $b.breadcrumbs('addAll', items);
+        },
+
+
+        getToolbarButtons: function() {
+            var self = this;
+
+            return [
+
+            ];
+
+        },
+        getBreadcrumbItems: function() {
+            var self = this;
+            return [
+                {
+                    pageTitle: "UIL Artigianato - Iscritti"
+                },
+                {
+                    icon: "glyphicon glyphicon-home",
+                    href: BASE
+                },
+                {
+                    label: "Riepilogo per rappresentanza",
+                }
+            ];
+        }
+
+    });
+
+
+
 
 
     exports.RiepilogoRemoteView = RiepilogoRemoteView;
@@ -908,6 +1084,9 @@ define([
 
     exports.PivotTotRemoteView = PivotTotRemoteView;
     exports.RiepilogoTotRemoteView = RiepilogoTotRemoteView;
+
+    exports.PivotRapRemoteView = PivotRapRemoteView;
+    exports.RiepilogoRapRemoteView = RiepilogoRapRemoteView;
     return exports;
 
 });

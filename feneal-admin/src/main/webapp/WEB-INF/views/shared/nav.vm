@@ -204,6 +204,18 @@
                                 <span class="sidebar-title">Riepilogo</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="#/pivotrapp" class="framework-navigation">
+                                <span class="glyphicons glyphicons-stats"></span>
+                                <span class="sidebar-title">Analisi per rappresentanza</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/riepilogorapp" class="framework-navigation">
+                                <span class="glyphicons glyphicons-pie_chart"></span>
+                                <span class="sidebar-title">Riepilogo per rappresentanza</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

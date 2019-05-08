@@ -178,6 +178,9 @@ require([
         ui.Navigation.instance().registerController("riepilogodeleghe", function() { return new analisiController.RiepilogoDelegheController(); }, "singleton");
         ui.Navigation.instance().registerController("pivotdeleghe", function() { return new analisiController.PivotDelegheController(); }, "singleton");
 
+        //per rappresentanza
+        ui.Navigation.instance().registerController("pivotrapp", function() { return new analisiController.PivotRappController(); }, "singleton");
+        ui.Navigation.instance().registerController("riepilogorapp", function() { return new analisiController.RiepilogoRappController(); }, "singleton");
 
     })();
 

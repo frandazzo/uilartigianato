@@ -185,6 +185,40 @@ define([
         }
     });
 
+    //RAPPRESENTANZA
+    var PivotRappController = fcontrollers.Controller.extend({
+        ctor: function(){
+            PivotRappController.super.ctor.call(this);
+        },
+        index: function(params) {
+
+
+            var url = BASE + "analisi/pivotrap";
+            var service = new fmodel.AjaxService();
+            service.set({
+                url: url
+            });
+            return new views.PivotRapRemoteView(service);
+
+        }
+    });
+    var RiepilogoRappController = fcontrollers.Controller.extend({
+        ctor: function(){
+            RiepilogoRappController.super.ctor.call(this);
+        },
+        index: function(params) {
+
+
+            var url = BASE + "analisi/riepilogoRap";
+            var service = new fmodel.AjaxService();
+            service.set({
+                url: url
+            });
+            return new views.RiepilogoRapRemoteView(service);
+
+        }
+    });
+
 
 
 
@@ -203,5 +237,8 @@ define([
 
     exports.PivotTotController = PivotTotController;
     exports.RiepilogoTotController = RiepilogoTotController;
+
+    exports.PivotRappController = PivotRappController;
+    exports.RiepilogoRappController = RiepilogoRappController;
     return exports;
 });
