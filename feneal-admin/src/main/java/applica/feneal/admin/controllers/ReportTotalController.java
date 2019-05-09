@@ -48,7 +48,7 @@ public class ReportTotalController {
     SimpleResponse reportTotal(@RequestBody UiDelegheReportSearchParams params){
 
         try {
-            List<UiDelega> f = delFac.reportDeleghe(params);
+            List<UiDelega> f = delFac.reportDelegheTot(params);
             return new ValueResponse(f);
         } catch(Exception ex){
             return new ErrorResponse(ex.getMessage());
@@ -104,108 +104,11 @@ public class ReportTotalController {
                         .putParam(Params.ROW, "dt1")
                         .putParam(Params.FORM_COLUMN, " ");
 
-
-                formDescriptor.addField("firm", String.class, "Azienda", "Filtri", applicationContext.getBean(AziendeForCompanySingleSearchbleFieldRenderer.class))
-                        .putParam(Params.COLS, Values.COLS_12)
-                        .putParam(Params.ROW, "dt1")
-                        .putParam(Params.FORM_COLUMN, " ");
             }
 
 
 
-            if (((User) security.getLoggedUser()).getCompany().getTipoConfederazione() == 1) {
-                //se non si parla di contesto regionale ma di contesto nazionale abilito il flag
-                formDescriptor.addField("causaleIscrizione", String.class, "Caus. sottosc.", null, applicationContext.getBean(CausaleIscrizSelectFieldRenderer.class))
-                        .putParam(Params.COLS, Values.COLS_12)
-                        .putParam(Params.ROW, "dt5")
-                        .putParam(Params.FORM_COLUMN, " ");
-            }
 
-
-            formDescriptor.addField("subscribed", Boolean.class, "Sottoscritta", null, applicationContext.getBean(CustomCheckboxFieldRenderer.class))
-                    .putParam(Params.COLS, Values.COLS_4)
-                    .putParam(Params.ROW, "dt6")
-                    .putParam(Params.FORM_COLUMN, "  ");
-            formDescriptor.addField("subscribedFromDate", String.class, "Da", null, applicationContext.getBean(DatepickerReportDelegheFieldRenderer.class))
-                    .putParam(Params.PLACEHOLDER, "Da")
-                    .putParam(Params.COLS, Values.COLS_4)
-                    .putParam(Params.ROW, "dt6")
-                    .putParam(Params.FORM_COLUMN, "  ");
-            formDescriptor.addField("subscribedToDate", String.class, "a", null, applicationContext.getBean(DatepickerReportDelegheFieldRenderer.class))
-                    .putParam(Params.PLACEHOLDER, "A")
-                    .putParam(Params.COLS, Values.COLS_4)
-                    .putParam(Params.ROW, "dt6")
-                    .putParam(Params.FORM_COLUMN, "  ");
-            formDescriptor.addField("sent", Boolean.class, "Inoltrata", null, applicationContext.getBean(CustomCheckboxFieldRenderer.class))
-                    .putParam(Params.COLS, Values.COLS_4)
-                    .putParam(Params.ROW, "dt7")
-                    .putParam(Params.FORM_COLUMN, "  ");
-            formDescriptor.addField("sentFromDate", String.class, "Da", null, applicationContext.getBean(DatepickerReportDelegheFieldRenderer.class))
-                    .putParam(Params.PLACEHOLDER, "Da")
-                    .putParam(Params.COLS, Values.COLS_4)
-                    .putParam(Params.ROW, "dt7")
-                    .putParam(Params.FORM_COLUMN, "  ");
-            formDescriptor.addField("sentToDate", String.class, "a", null, applicationContext.getBean(DatepickerReportDelegheFieldRenderer.class))
-                    .putParam(Params.PLACEHOLDER, "A")
-                    .putParam(Params.COLS, Values.COLS_4)
-                    .putParam(Params.ROW, "dt7")
-                    .putParam(Params.FORM_COLUMN, "  ");
-            formDescriptor.addField("accepted", Boolean.class, "Accettata", null, applicationContext.getBean(CustomCheckboxFieldRenderer.class))
-                    .putParam(Params.COLS, Values.COLS_4)
-                    .putParam(Params.ROW, "dt8")
-                    .putParam(Params.FORM_COLUMN, "  ");
-            formDescriptor.addField("acceptedFromDate", String.class, "Da", null, applicationContext.getBean(DatepickerReportDelegheFieldRenderer.class))
-                    .putParam(Params.PLACEHOLDER, "Da")
-                    .putParam(Params.COLS, Values.COLS_4)
-                    .putParam(Params.ROW, "dt8")
-                    .putParam(Params.FORM_COLUMN, "  ");
-            formDescriptor.addField("acceptedToDate", String.class, "a", null, applicationContext.getBean(DatepickerReportDelegheFieldRenderer.class))
-                    .putParam(Params.PLACEHOLDER, "A")
-                    .putParam(Params.COLS, Values.COLS_4)
-                    .putParam(Params.ROW, "dt8")
-                    .putParam(Params.FORM_COLUMN, "  ");
-            formDescriptor.addField("activated", Boolean.class, "Attivata", null, applicationContext.getBean(CustomCheckboxFieldRenderer.class))
-                    .putParam(Params.COLS, Values.COLS_4)
-                    .putParam(Params.ROW, "dt9")
-                    .putParam(Params.FORM_COLUMN, "  ");
-            formDescriptor.addField("activatedFromDate", String.class, "Da", null, applicationContext.getBean(DatepickerReportDelegheFieldRenderer.class))
-                    .putParam(Params.PLACEHOLDER, "Da")
-                    .putParam(Params.COLS, Values.COLS_4)
-                    .putParam(Params.ROW, "dt9")
-                    .putParam(Params.FORM_COLUMN, "  ");
-            formDescriptor.addField("activatedToDate", String.class, "a", null, applicationContext.getBean(DatepickerReportDelegheFieldRenderer.class))
-                    .putParam(Params.PLACEHOLDER, "A")
-                    .putParam(Params.COLS, Values.COLS_4)
-                    .putParam(Params.ROW, "dt9")
-                    .putParam(Params.FORM_COLUMN, "  ");
-            formDescriptor.addField("cancelled", Boolean.class, "Annullata", null, applicationContext.getBean(CustomCheckboxFieldRenderer.class))
-                    .putParam(Params.COLS, Values.COLS_4)
-                    .putParam(Params.ROW, "dt10")
-                    .putParam(Params.FORM_COLUMN, "  ");
-//            formDescriptor.addField("cancelledFromDate", String.class, "Da", null, applicationContext.getBean(DatepickerReportDelegheFieldRenderer.class))
-//                    .putParam(Params.PLACEHOLDER, "Da")
-//                    .putParam(Params.COLS, Values.COLS_4)
-//                    .putParam(Params.ROW, "dt10")
-//                    .putParam(Params.FORM_COLUMN, "  ");
-//            formDescriptor.addField("cancelledToDate", String.class, "a", null, applicationContext.getBean(DatepickerReportDelegheFieldRenderer.class))
-//                    .putParam(Params.PLACEHOLDER, "A")
-//                    .putParam(Params.COLS, Values.COLS_4)
-//                    .putParam(Params.ROW, "dt10")
-//                    .putParam(Params.FORM_COLUMN, "  ");
-//            formDescriptor.addField("revoked", Boolean.class, "Revocata", null, applicationContext.getBean(CustomCheckboxFieldRenderer.class))
-//                    .putParam(Params.COLS, Values.COLS_4)
-//                    .putParam(Params.ROW, "dt9")
-//                    .putParam(Params.FORM_COLUMN, "  ");
-//            formDescriptor.addField("revokedFromDate", String.class, "Da", null, applicationContext.getBean(DatepickerReportDelegheFieldRenderer.class))
-//                    .putParam(Params.PLACEHOLDER, "Da")
-//                    .putParam(Params.COLS, Values.COLS_4)
-//                    .putParam(Params.ROW, "dt9")
-//                    .putParam(Params.FORM_COLUMN, "  ");
-//            formDescriptor.addField("revokedToDate", String.class, "a", null, applicationContext.getBean(DatepickerReportDelegheFieldRenderer.class))
-//                    .putParam(Params.PLACEHOLDER, "A")
-//                    .putParam(Params.COLS, Values.COLS_4)
-//                    .putParam(Params.ROW, "dt9")
-//                    .putParam(Params.FORM_COLUMN, "  ");
 
 
             FormResponse response = new FormResponse();

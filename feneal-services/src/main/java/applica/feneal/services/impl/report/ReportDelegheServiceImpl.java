@@ -2,9 +2,13 @@ package applica.feneal.services.impl.report;
 
 import applica.feneal.domain.data.core.configuration.CategoriaRepository;
 import applica.feneal.domain.data.core.deleghe.DelegheRepository;
+import applica.feneal.domain.data.core.rappresentanza.DelegaBilateralitaRepository;
+import applica.feneal.domain.data.core.rappresentanza.DelegaUncRepository;
 import applica.feneal.domain.model.core.configuration.Categoria;
 import applica.feneal.domain.model.core.deleghe.Delega;
 import applica.feneal.domain.model.core.deleghe.UiDelegheReportSearchParams;
+import applica.feneal.domain.model.core.rappresentanza.DelegaBilateralita;
+import applica.feneal.domain.model.core.rappresentanza.DelegaUnc;
 import applica.feneal.services.GeoService;
 import applica.feneal.services.ReportDelegheService;
 import applica.framework.Disjunction;
@@ -33,15 +37,14 @@ public class ReportDelegheServiceImpl implements ReportDelegheService {
     private DelegheRepository delRep;
 
     @Autowired
-    private Security sec;
-
-
-    @Autowired
     private CategoriaRepository secRep;
 
 
-    @Autowired
-    private GeoService geoSvc;
+   @Autowired
+   private DelegaBilateralitaRepository delBilRep;
+
+   @Autowired
+   private DelegaUncRepository delUncRep;
 
 
 
@@ -328,6 +331,72 @@ public class ReportDelegheServiceImpl implements ReportDelegheService {
         List<Delega> del = delRep.find(req).getRows();
         return del;
 
+    }
+
+    @Override
+    public List<DelegaBilateralita> retrieveDelegheBilateralita(UiDelegheReportSearchParams params) {
+        String region = params.getCompany();
+        String province = params.getProvince();
+        String sector = params.getSector();
+
+        LoadRequest req = LoadRequest.build();
+        if (!StringUtils.isEmpty(region)){
+            Filter fc = new Filter("companyId", Long.parseLong(region), Filter.EQ);
+            req.getFilters().add(fc);
+        }
+        if (!StringUtils.isEmpty(province)){
+            Integer proId = Integer.parseInt(province);
+            Filter f1 = new Filter("province.id", proId, Filter.EQ);
+            req.getFilters().add(f1);
+        }
+
+        if (!StringUtils.isEmpty(sector)){
+            Categoria s = secRep.get(params.getSector()).orElse(null);
+
+            if (s != null){
+                Filter f2 = new Filter("sector", s.getId(), Filter.EQ);
+                req.getFilters().add(f2);
+            }
+        }
+
+        List<DelegaBilateralita> del = delBilRep.find(req).getRows();
+        return del;
+
+    }
+
+    @Override
+    public List<DelegaUnc> retrieveDelegheUnc(UiDelegheReportSearchParams params) {
+        String region = params.getCompany();
+        String province = params.getProvince();
+        String sector = params.getSector();
+        String firm = params.getFirm();
+        LoadRequest req = LoadRequest.build();
+        if (!StringUtils.isEmpty(region)){
+            Filter fc = new Filter("companyId", Long.parseLong(region), Filter.EQ);
+            req.getFilters().add(fc);
+        }
+        if (!StringUtils.isEmpty(province)){
+            Integer proId = Integer.parseInt(province);
+            Filter f1 = new Filter("province.id", proId, Filter.EQ);
+            req.getFilters().add(f1);
+        }
+
+        if (!StringUtils.isEmpty(sector)){
+            Categoria s = secRep.get(params.getSector()).orElse(null);
+
+            if (s != null){
+                Filter f2 = new Filter("sector", s.getId(), Filter.EQ);
+                req.getFilters().add(f2);
+            }
+        }
+
+        if (!StringUtils.isEmpty(firm)){
+            Filter f4 = new Filter("workerCompany", Long.parseLong(firm), Filter.EQ);
+            req.getFilters().add(f4);
+        }
+
+        List<DelegaUnc> del = delUncRep.find(req).getRows();
+        return del;
     }
 
 

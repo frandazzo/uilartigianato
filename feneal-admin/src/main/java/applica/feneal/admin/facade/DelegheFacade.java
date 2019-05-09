@@ -14,6 +14,8 @@ import applica.feneal.domain.model.core.deleghe.Delega;
 import applica.feneal.domain.model.core.deleghe.UiDelegheReportSearchParams;
 import applica.feneal.domain.model.core.lavoratori.Lavoratore;
 import applica.feneal.domain.model.core.lavoratori.ListaLavoro;
+import applica.feneal.domain.model.core.rappresentanza.DelegaBilateralita;
+import applica.feneal.domain.model.core.rappresentanza.DelegaUnc;
 import applica.feneal.domain.model.setting.CausaleRevoca;
 import applica.feneal.services.DelegheService;
 import applica.feneal.services.ListaLavoroService;
@@ -132,6 +134,170 @@ public class DelegheFacade {
         return convertDelegheToUiDeleghe(del);
     }
 
+    public List<UiDelega> reportDelegheBilateralita(UiDelegheReportSearchParams params) {
+        List<DelegaBilateralita> del = delService.retrieveDelegheBilateralita(params);
+
+        return convertDelegheToUiDelegheBilateralita(del);
+    }
+
+    public List<UiDelega> reportDelegheUnc(UiDelegheReportSearchParams params) {
+        List<DelegaUnc> del = delService.retrieveDelegheUnc(params);
+
+        return convertDelegheToUiDelegheUnc(del);
+    }
+
+    private List<UiDelega> convertDelegheToUiDelegheUnc(List<DelegaUnc> del) {
+        List<UiDelega> result = new ArrayList<>();
+
+        List<Company> companies = comRep.find(null).getRows();
+
+        for (DelegaUnc delega : del) {
+            UiDelega d = new UiDelega();
+            d.setCompanyId(delega.getCompanyId());
+            d.setRegione(companies.stream().filter(a ->a.getLid() == delega.getCompanyId()).findFirst().orElse(null).getDescription());
+            d.setDelegaProvincia(delega.getProvince().getDescription());
+            d.setDelegaDataDocumento(delega.getDocumentDate());
+            d.setDelegaDataAnnullamento(delega.getCancelDate());
+            if (delega.getSector() != null)
+                d.setDelegaSettore(delega.getSector().getDescription());
+
+            d.setDelegaId(delega.getLid());
+            d.setDelegaNote(delega.getNotes());
+
+            populateUiDelegaWorkerData1(delega, d);
+
+            if (delega.getWorkerCompany() != null) {
+                d.setAziendaRagioneSociale(delega.getWorkerCompany().getDescription());
+                d.setAziendaCitta(delega.getWorkerCompany().getCity());
+                d.setAziendaProvincia(delega.getWorkerCompany().getProvince());
+                d.setAziendaCap(delega.getWorkerCompany().getCap());
+                d.setAziendaIndirizzo(delega.getWorkerCompany().getAddress());
+                d.setAziendaNote(delega.getWorkerCompany().getNotes());
+                d.setAziendaId(delega.getWorkerCompany().getLid());
+            }
+            result.add(d);
+        }
+
+        return result;
+    }
+
+    private List<UiDelega> convertDelegheToUiDelegheBilateralita(List<DelegaBilateralita> del) {
+        List<UiDelega> result = new ArrayList<>();
+
+        List<Company> companies = comRep.find(null).getRows();
+
+        for (DelegaBilateralita delega : del) {
+            UiDelega d = new UiDelega();
+            d.setCompanyId(delega.getCompanyId());
+            d.setRegione(companies.stream().filter(a ->a.getLid() == delega.getCompanyId()).findFirst().orElse(null).getDescription());
+            d.setDelegaProvincia(delega.getProvince().getDescription());
+            d.setDelegaDataDocumento(delega.getDocumentDate());
+            d.setDelegaDataAnnullamento(delega.getCancelDate());
+            if (delega.getSector() != null)
+                d.setDelegaSettore(delega.getSector().getDescription());
+
+            d.setDelegaId(delega.getLid());
+            d.setDelegaNote(delega.getNotes());
+
+            populateUiDelegaWorkerData(delega, d);
+
+//            if (delega.getWorkerCompany() != null) {
+//                d.setAziendaRagioneSociale(delega.getWorkerCompany().getDescription());
+//                d.setAziendaCitta(delega.getWorkerCompany().getCity());
+//                d.setAziendaProvincia(delega.getWorkerCompany().getProvince());
+//                d.setAziendaCap(delega.getWorkerCompany().getCap());
+//                d.setAziendaIndirizzo(delega.getWorkerCompany().getAddress());
+//                d.setAziendaNote(delega.getWorkerCompany().getNotes());
+//                d.setAziendaId(delega.getWorkerCompany().getLid());
+//            }
+            result.add(d);
+        }
+
+        return result;
+    }
+
+    private void populateUiDelegaWorkerData(DelegaBilateralita delega, UiDelega d) {
+        d.setLavoratoreId(delega.getWorker().getLid());
+        d.setLavoratoreCap(delega.getWorker().getCap());
+        d.setLavoratoreCellulare(delega.getWorker().getCellphone());
+        d.setLavoratorMail(delega.getWorker().getMail());
+        d.setLavoratoreTelefono(delega.getWorker().getPhone());
+        d.setLavoratoreCittaResidenza(delega.getWorker().getLivingCity());
+        d.setLavoratoreCodiceFiscale(delega.getWorker().getFiscalcode());
+        d.setLavoratoreCognome(delega.getWorker().getSurname());
+
+        d.setLavoratoreDataNascita(delega.getWorker().getBirthDate());
+        d.setLavoratoreIndirizzo(delega.getWorker().getAddress());
+        d.setLavoratoreLuogoNascita(delega.getWorker().getBirthPlace());
+        d.setLavoratoreNazionalita(delega.getWorker().getNationality());
+        d.setLavoratoreNome(delega.getWorker().getName());
+        d.setLavoratoreCittaResidenza(delega.getWorker().getLivingCity());
+        d.setLavoratoreProvinciaNascita(delega.getWorker().getBirthProvince());
+        d.setLavoratoreProvinciaResidenza(delega.getWorker().getLivingProvince());
+        if (delega.getWorker().getSex().equals("M"))
+            d.setLavoratoreSesso(Lavoratore.MALE);
+        else
+            d.setLavoratoreSesso(Lavoratore.FEMALE);
+
+//            d.setLavoratoreCodiceCassaEdile(delega.getWorker().getCe());
+//            d.setLavoratoreCodiceEdilcassa(delega.getWorker().getEc());
+        if (delega.getWorker().getFund() != null)
+            d.setLavoratoreFondo(delega.getWorker().getFund().getDescription());
+
+
+        if (delega.getWorker().getAttribuzione1() != null)
+            d.setLavoratoreAttribuzione1(delega.getWorker().getAttribuzione1().getDescription());
+
+        if (delega.getWorker().getAttribuzione2() != null)
+            d.setLavoratoreAttribuzione2(delega.getWorker().getAttribuzione2().getDescription());
+
+        if (delega.getWorker().getAttribuzione3() != null)
+            d.setLavoratoreAttribuzione3(delega.getWorker().getAttribuzione3().getDescription());
+
+
+        d.setLavoratoreNote(delega.getWorker().getNotes());
+    }
+    private void populateUiDelegaWorkerData1(DelegaUnc delega, UiDelega d) {
+        d.setLavoratoreId(delega.getWorker().getLid());
+        d.setLavoratoreCap(delega.getWorker().getCap());
+        d.setLavoratoreCellulare(delega.getWorker().getCellphone());
+        d.setLavoratorMail(delega.getWorker().getMail());
+        d.setLavoratoreTelefono(delega.getWorker().getPhone());
+        d.setLavoratoreCittaResidenza(delega.getWorker().getLivingCity());
+        d.setLavoratoreCodiceFiscale(delega.getWorker().getFiscalcode());
+        d.setLavoratoreCognome(delega.getWorker().getSurname());
+
+        d.setLavoratoreDataNascita(delega.getWorker().getBirthDate());
+        d.setLavoratoreIndirizzo(delega.getWorker().getAddress());
+        d.setLavoratoreLuogoNascita(delega.getWorker().getBirthPlace());
+        d.setLavoratoreNazionalita(delega.getWorker().getNationality());
+        d.setLavoratoreNome(delega.getWorker().getName());
+        d.setLavoratoreCittaResidenza(delega.getWorker().getLivingCity());
+        d.setLavoratoreProvinciaNascita(delega.getWorker().getBirthProvince());
+        d.setLavoratoreProvinciaResidenza(delega.getWorker().getLivingProvince());
+        if (delega.getWorker().getSex().equals("M"))
+            d.setLavoratoreSesso(Lavoratore.MALE);
+        else
+            d.setLavoratoreSesso(Lavoratore.FEMALE);
+
+//            d.setLavoratoreCodiceCassaEdile(delega.getWorker().getCe());
+//            d.setLavoratoreCodiceEdilcassa(delega.getWorker().getEc());
+        if (delega.getWorker().getFund() != null)
+            d.setLavoratoreFondo(delega.getWorker().getFund().getDescription());
+
+
+        if (delega.getWorker().getAttribuzione1() != null)
+            d.setLavoratoreAttribuzione1(delega.getWorker().getAttribuzione1().getDescription());
+
+        if (delega.getWorker().getAttribuzione2() != null)
+            d.setLavoratoreAttribuzione2(delega.getWorker().getAttribuzione2().getDescription());
+
+        if (delega.getWorker().getAttribuzione3() != null)
+            d.setLavoratoreAttribuzione3(delega.getWorker().getAttribuzione3().getDescription());
+
+
+        d.setLavoratoreNote(delega.getWorker().getNotes());
+    }
 
     public List<UiDelega> convertDelegheToUiDeleghe(List<Delega> del) {
 
@@ -501,8 +667,22 @@ public class DelegheFacade {
     }
 
 
+    public List<UiDelega> reportDelegheTot(UiDelegheReportSearchParams params) {
+        List<UiDelega> deleghe = reportDeleghe(params);
+        List<UiDelega> delegheBile = reportDelegheBilateralita(params);
+        List<UiDelega> delegheUnc = reportDelegheUnc(params);
+
+        deleghe.forEach(a -> a.setTipo("Delega"));
+        delegheBile.forEach(a -> a.setTipo("Delega Bilateralita"));
+        delegheUnc.forEach(a -> a.setTipo("Delega Unc"));
+
+        List<UiDelega> result = new ArrayList<>();
+        result.addAll(deleghe);
+        result.addAll(delegheBile);
+        result.addAll(delegheUnc);
 
 
+        return result;
 
-
+    }
 }

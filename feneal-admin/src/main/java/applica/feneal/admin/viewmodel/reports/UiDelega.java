@@ -16,7 +16,18 @@ public class UiDelega {
     private Date delegaDataAnnullamento;
     private Date delegaDataRevoca;
     private String delegaOperatore;
-    //settore della delega se impianti fissi o edile
+
+    private  String tipo;
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+//settore della delega se impianti fissi o edile
 
     private String delegaSettore;
     //ente bilaterale di riferimento (solo per delega edile)

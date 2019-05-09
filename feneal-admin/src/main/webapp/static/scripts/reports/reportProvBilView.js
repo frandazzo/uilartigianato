@@ -296,86 +296,43 @@ define([
                     //     return data.delegaSettore;
                     // }},
 
-                    { dataField:"delegaDataDocumento", visible : true, visibleIndex: 4, dataType:'date'},
-                    { dataField:"delegaDataInoltro", visible : false, dataType:'date'},
-                    { dataField:"delegaDataAccettazione", visible : false, dataType:'date'},
-                    { dataField:"delegaDataAttivazione", visible : false, dataType:'date'},
-                    { dataField:"delegaDataAnnullamento", visible : false, dataType:'date'},
-                    { dataField:"delegaDataRevoca", visible : false, dataType:'date'},
-                    { dataField:"delegaOperatore",  visible : true, visibleIndex: 1},
-                    { dataField:"delegaProvincia",  visible : false},
-                    { dataField:"regione",  visible : false},
-                    { dataField:"delegaBreviMano",  visible : false},
+                    { dataField:"delegaDataDocumento", visible : true, visibleIndex: 1, dataType:'date'},
+                    { dataField:"delegaDataAnnullamento", visible : true,visibleIndex: 5, dataType:'date'},
 
-                    { dataField:"delegaSettore", visible : true, visibleIndex: 2},
-                    { dataField:"delegaContract", visible : false, caption: "Contratto"},
-                    { dataField:"delegaStato", visible : true, visibleIndex: 5,
+                    { dataField:"delegaProvincia",  visible : true, visibleIndex: 3},
+                    { dataField:"regione",  visible : true, visibleIndex: 2},
+                    { dataField:"delegaSettore", visible : true, visibleIndex: 4},
 
-                        cellTemplate: function (container, options) {
-                            //container.addClass("img-container");
-                            var stato = options.data.delegaStato;
 
-                            var badgeClass = "";
-                            if (stato == "Accettata" || stato == 'Attivata')
-                                badgeClass = "label-success";
-                            else
-                                badgeClass = "label-default";
 
-                            $("<span class='label'/>")
-                                .text(stato)
-                                .addClass(badgeClass)
-                                .appendTo(container);
-                        }
-                    },
-                    { dataField:"delegaCollaboratore", visible : false},
                     { dataField:"delegaNote", visible : false},
-                    { dataField:"delegaCausaleSottoscrizione", visible : false},
-                    { dataField:"delegaCausaleRevoca", visible : false},
-                    { dataField:"delegaCausaleAnnullamento", visible : false},
-                    { dataField:"delegaId", visible : false,
-                        cellTemplate: function (container, options) {
-                            //container.addClass("img-container");
-                            var id = options.data.delegaId;
 
+                    { dataField:"delegaId", visible : false},
 
-                            $("<a />")
-                                .text(id)
-                                .attr("href", "javascript:;")
-                                .on('click', function(){
-                                    ui.Navigation.instance().navigate("editdelega", "index", {
-                                        fs: this.fullScreenForm,
-                                        workerId : options.data.lavoratoreId,
-                                        id: id
-                                    });
-                                })
-                                .appendTo(container);
-                        }
-                    },
-
-                    { dataField:"aziendaRagioneSociale", visible : true, visibleIndex: 6,
-
-                        cellTemplate: function (container, options) {
-                            //container.addClass("img-container");
-                            var name = options.data.aziendaRagioneSociale;
-
-
-                            $("<a />")
-                                .text(name)
-                                .attr("href", "javascript:;")
-                                .on('click', function(){
-                                    ui.Navigation.instance().navigate("summaryfirm", "index", {
-                                        id: options.data.aziendaId
-                                    });
-                                })
-                                .appendTo(container);
-                        }
-                    },
-                    { dataField:"aziendaCitta", visible : false},
-                    { dataField:"aziendaProvincia", visible : false},
-                    { dataField:"aziendaCap", visible : false},
-                    { dataField:"aziendaIndirizzo", visible : false},
-                    { dataField:"aziendaNote", visible : false},
-                    { dataField:"aziendaId", visible : false},
+                    // { dataField:"aziendaRagioneSociale", visible : true, visibleIndex: 6,
+                    //
+                    //     cellTemplate: function (container, options) {
+                    //         //container.addClass("img-container");
+                    //         var name = options.data.aziendaRagioneSociale;
+                    //
+                    //
+                    //         $("<a />")
+                    //             .text(name)
+                    //             .attr("href", "javascript:;")
+                    //             .on('click', function(){
+                    //                 ui.Navigation.instance().navigate("summaryfirm", "index", {
+                    //                     id: options.data.aziendaId
+                    //                 });
+                    //             })
+                    //             .appendTo(container);
+                    //     }
+                    // },
+                    // { dataField:"aziendaCitta", visible : false},
+                    // { dataField:"aziendaProvincia", visible : false},
+                    // { dataField:"aziendaCap", visible : false},
+                    // { dataField:"aziendaIndirizzo", visible : false},
+                    // { dataField:"aziendaNote", visible : false},
+                    // { dataField:"aziendaId", visible : false},
 
                     { dataField:"lavoratoreNomeCompleto", fixed :true, visible : true, visibleIndex: 0,
                         cellTemplate: function (container, options) {
