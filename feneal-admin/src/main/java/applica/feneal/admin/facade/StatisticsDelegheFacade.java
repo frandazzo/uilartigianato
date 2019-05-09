@@ -7,9 +7,7 @@ import applica.feneal.services.StatisticsDelegheAbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -70,7 +68,15 @@ public class StatisticsDelegheFacade {
         MergeRemoveDupSort d = new MergeRemoveDupSort();
        Integer[] delegheresult = d.mergeRemoveDupSortIt(deleghe, delegheBil);
 
-        return Arrays.stream(d.mergeRemoveDupSortIt(delegheresult,delegheUnc)).distinct().collect(Collectors.toList());
+       List<Integer> l = Arrays.stream(d.mergeRemoveDupSortIt(delegheresult, delegheUnc)).distinct().collect(Collectors.toList());
+
+        Collections.sort(l, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2)*-1;
+            }
+        });
+        return l;
 
 
     }

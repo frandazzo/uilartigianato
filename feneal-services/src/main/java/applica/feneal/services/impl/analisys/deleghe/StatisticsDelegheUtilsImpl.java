@@ -609,10 +609,10 @@ public class StatisticsDelegheUtilsImpl implements StatisticsDelegheUtils {
 
 
                     if (!StringUtils.isEmpty(regionId))
-                        regionWhere = " and r.DESCRIZIONE like '" + regionId.replace("'", "''") + "' ";
+                        regionWhere = " and Regione like '" + regionId.replace("'", "''") + "' ";
 
                     else if (!StringUtils.isEmpty(categoryId))
-                        categoryWhere = " and c.description like '" + categoryId + "' ";
+                        categoryWhere = " and settore like '" + categoryId + "' ";
 
 
                     String sqlQueryProvince = "select a.Provincia as label, Count(a.Id_Delega) as total  from \n" +
