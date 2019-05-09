@@ -4,12 +4,17 @@ import applica.feneal.domain.data.Command;
 import applica.feneal.domain.data.UsersRepository;
 import applica.feneal.domain.data.core.configuration.CategoriaRepository;
 import applica.feneal.domain.data.core.deleghe.DelegheRepository;
+import applica.feneal.domain.data.core.lavoratori.LavoratoriRepository;
+import applica.feneal.domain.data.core.rappresentanza.DelegaBilateralitaRepository;
+import applica.feneal.domain.data.core.rappresentanza.DelegaUncRepository;
 import applica.feneal.domain.model.Filters;
 import applica.feneal.domain.model.Role;
 import applica.feneal.domain.model.User;
 import applica.feneal.domain.model.core.deleghe.Delega;
 import applica.feneal.domain.model.core.deleghe.DelegaState;
 import applica.feneal.domain.model.core.deleghe.states.*;
+import applica.feneal.domain.model.core.rappresentanza.DelegaBilateralita;
+import applica.feneal.domain.model.core.rappresentanza.DelegaUnc;
 import applica.feneal.domain.model.core.servizi.search.UiQuoteHeaderParams;
 import applica.feneal.domain.model.setting.CausaleRevoca;
 import applica.feneal.domain.model.setting.option.ApplicationOptions;
@@ -50,6 +55,11 @@ public class DelegaServiceImpl implements DelegheService {
     @Autowired
     private UsersRepository urep;
 
+    @Autowired
+    private DelegaBilateralitaRepository bilRep;
+
+    @Autowired
+    private DelegaUncRepository uncRep;
 
 
 
@@ -602,6 +612,19 @@ public class DelegaServiceImpl implements DelegheService {
             }
         });
 
+
+    }
+
+    @Override
+    public List<DelegaUnc> getAllWorkerDelegheUnc(long id) {
+        LoadRequest req = LoadRequest.build().disableOwnershipQuery().filter("worker", id);
+        return  uncRep.find(req).getRows();
+    }
+
+    @Override
+    public List<DelegaBilateralita> getAllWorkerDelegheBilateralita(long id) {
+        LoadRequest req = LoadRequest.build().disableOwnershipQuery().filter("worker", id);
+        return  bilRep.find(req).getRows();
 
     }
 }

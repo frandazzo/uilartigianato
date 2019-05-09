@@ -21,6 +21,8 @@ import applica.feneal.domain.model.core.lavoratori.FiscalData;
 import applica.feneal.domain.model.core.lavoratori.Lavoratore;
 import applica.feneal.domain.model.core.lavoratori.LavoratoreLastVersion;
 import applica.feneal.domain.model.core.lavoratori.search.LavoratoreSearchParams;
+import applica.feneal.domain.model.core.rappresentanza.DelegaBilateralita;
+import applica.feneal.domain.model.core.rappresentanza.DelegaUnc;
 import applica.feneal.domain.model.geo.City;
 import applica.feneal.domain.model.geo.Country;
 import applica.feneal.services.DelegheService;
@@ -562,8 +564,8 @@ public class LavoratoriController {
     SimpleResponse iscrizionidetailDelegheUnc(@PathVariable long id) {
 
         try {
-            List<Delega> a = delServ.getAllWorkerDeleghe(id);
-            return new ValueResponse(delFac.convertDelegheToUiDeleghe(a));
+            List<DelegaUnc> a = delServ.getAllWorkerDelegheUnc(id);
+            return new ValueResponse(delFac.convertDelegheToUiDelegheUnc(a));
         } catch(Exception e) {
             e.printStackTrace();
             return new ErrorResponse(e.getMessage());
@@ -577,8 +579,8 @@ public class LavoratoriController {
     SimpleResponse iscrizionidetailDelegheBil(@PathVariable long id) {
 
         try {
-            List<Delega> a = delServ.getAllWorkerDeleghe(id);
-            return new ValueResponse(delFac.convertDelegheToUiDeleghe(a));
+            List<DelegaBilateralita> a = delServ.getAllWorkerDelegheBilateralita(id);
+            return new ValueResponse(delFac.convertDelegheToUiDelegheBilateralita(a));
         } catch(Exception e) {
             e.printStackTrace();
             return new ErrorResponse(e.getMessage());

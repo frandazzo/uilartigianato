@@ -146,7 +146,7 @@ public class DelegheFacade {
         return convertDelegheToUiDelegheUnc(del);
     }
 
-    private List<UiDelega> convertDelegheToUiDelegheUnc(List<DelegaUnc> del) {
+    public List<UiDelega> convertDelegheToUiDelegheUnc(List<DelegaUnc> del) {
         List<UiDelega> result = new ArrayList<>();
 
         List<Company> companies = comRep.find(null).getRows();
@@ -181,7 +181,7 @@ public class DelegheFacade {
         return result;
     }
 
-    private List<UiDelega> convertDelegheToUiDelegheBilateralita(List<DelegaBilateralita> del) {
+    public List<UiDelega> convertDelegheToUiDelegheBilateralita(List<DelegaBilateralita> del) {
         List<UiDelega> result = new ArrayList<>();
 
         List<Company> companies = comRep.find(null).getRows();

@@ -1,6 +1,8 @@
 package applica.feneal.services;
 
 import applica.feneal.domain.model.core.deleghe.Delega;
+import applica.feneal.domain.model.core.rappresentanza.DelegaBilateralita;
+import applica.feneal.domain.model.core.rappresentanza.DelegaUnc;
 import applica.feneal.domain.model.core.servizi.search.UiQuoteHeaderParams;
 import applica.feneal.domain.model.setting.CausaleRevoca;
 import applica.feneal.domain.model.setting.option.ApplicationOptions;
@@ -61,4 +63,8 @@ public interface DelegheService {
     Delega retrieveDelega(long idLavoratore, int provinceId, Date data,  long idAzienda);
 
     void saveImportedDelega(Delega d);
+
+    List<DelegaUnc> getAllWorkerDelegheUnc(long id);
+
+    List<DelegaBilateralita> getAllWorkerDelegheBilateralita(long id);
 }
