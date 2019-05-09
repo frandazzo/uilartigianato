@@ -436,6 +436,33 @@
 
             </div>
 
+            <div class="panel UNC">
+
+                <div class="panel-heading">
+                    <span class="panel-title">Deleghe UNC</span>
+                </div>
+
+                <div class="panel-body pn" style="border-right: 0px">
+
+                    <div id="containerMatriceDelegheUnc" ></div>
+
+                </div>
+
+            </div>
+
+            <div class="panel Bil">
+
+                <div class="panel-heading">
+                    <span class="panel-title">Deleghe Bil</span>
+                </div>
+
+                <div class="panel-body pn" style="border-right: 0px">
+
+                    <div id="containerMatriceDelegheBil" ></div>
+
+                </div>
+
+            </div>
 
 
         </div>
@@ -569,6 +596,11 @@
         var matriceDeleghe = new manager.matriceDeleghe('$summary.data.id');
         matriceDeleghe.init();
 
+        var matriceDelegheUnc = new manager.matriceDelegheUnc('$summary.data.id');
+        matriceDelegheUnc.init();
+
+        var matriceDelegheBil = new manager.matriceDelegheBil('$summary.data.id');
+        matriceDelegheBil.init();
     });
 
 </script>
