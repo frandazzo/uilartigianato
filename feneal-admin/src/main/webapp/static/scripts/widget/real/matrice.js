@@ -426,8 +426,6 @@ define([
 
     });
 
-
-
     var MatriceDeleghe = core.AObject.extend({
 
         ctor: function (workerId) {
@@ -682,11 +680,505 @@ define([
 
     });
 
+    var MatriceDelegheUnc = core.AObject.extend({
+
+        ctor: function (workerId) {
+            MatriceDelegheUnc.super.ctor.call(this);
+            this.workerId = workerId;
+        },
+        initGridIscrizioni : function(responseData){
+
+
+
+            var grid = $('#containerMatriceDelegheUnc').dxDataGrid({
+                dataSource:responseData,
+                columns:[
+                    { dataField:"delegaDataDocumento", visible : true, visibleIndex: 1, dataType:'date'},
+                    { dataField:"delegaDataInoltro", visible : false, dataType:'date'},
+                    { dataField:"delegaDataAccettazione", visible : false, dataType:'date'},
+                    { dataField:"delegaDataAttivazione", visible : false, dataType:'date'},
+                    { dataField:"delegaDataAnnullamento", visible : true,visibleIndex: 2, dataType:'date'},
+                    { dataField:"delegaDataRevoca", visible : false, dataType:'date'},
+                    { dataField:"delegaOperatore",  visible : false},
+                    { dataField:"delegaProvincia",  visible : true, visibleIndex: 4},
+                    { dataField:"regione",  visible : false},
+                    { dataField:"delegaBreviMano",  visible : false},
+
+                    { dataField:"delegaSettore", visible : true, visibleIndex: 3},
+                    { dataField:"delegaContract", visible : false, caption: "Contratto"},
+                    { dataField:"delegaStato", visible : false,
+
+                        cellTemplate: function (container, options) {
+                            //container.addClass("img-container");
+                            var stato = options.data.delegaStato;
+
+                            var badgeClass = "";
+                            if (stato == "Accettata" || stato == 'Attivata')
+                                badgeClass = "label-success";
+                            else
+                                badgeClass = "label-default";
+
+                            $("<span class='label'/>")
+                                .text(stato)
+                                .addClass(badgeClass)
+                                .appendTo(container);
+                        }
+                    },
+                    { dataField:"delegaCollaboratore", visible : false},
+                    { dataField:"delegaNote", visible : false},
+                    { dataField:"delegaCausaleSottoscrizione", visible : false},
+                    { dataField:"delegaCausaleRevoca", visible : false},
+                    { dataField:"delegaCausaleAnnullamento", visible : false},
+                    { dataField:"delegaId", visible : false,
+                        cellTemplate: function (container, options) {
+                            //container.addClass("img-container");
+                            var id = options.data.delegaId;
+
+
+                            $("<a />")
+                                .text(id)
+                                .attr("href", "javascript:;")
+                                .on('click', function(){
+                                    ui.Navigation.instance().navigate("editdelega", "index", {
+                                        fs: this.fullScreenForm,
+                                        workerId : options.data.lavoratoreId,
+                                        id: id
+                                    });
+                                })
+                                .appendTo(container);
+                        }
+                    },
+
+                    { dataField:"aziendaRagioneSociale", visible : true, visibleIndex: 6,
+
+                        cellTemplate: function (container, options) {
+                            //container.addClass("img-container");
+                            var name = options.data.aziendaRagioneSociale;
+
+
+                            $("<a />")
+                                .text(name)
+                                .attr("href", "javascript:;")
+                                .on('click', function(){
+                                    ui.Navigation.instance().navigate("summaryfirm", "index", {
+                                        id: options.data.aziendaId
+                                    });
+                                })
+                                .appendTo(container);
+                        }
+                    },
+                    { dataField:"aziendaCitta", visible : false},
+                    { dataField:"aziendaProvincia", visible : false},
+                    { dataField:"aziendaCap", visible : false},
+                    { dataField:"aziendaIndirizzo", visible : false},
+                    { dataField:"aziendaNote", visible : false},
+                    { dataField:"aziendaId", visible : false},
+
+                    { dataField:"lavoratoreNomeCompleto", fixed :true, visible : true, visibleIndex: 0,
+                        cellTemplate: function (container, options) {
+                            //container.addClass("img-container");
+                            // var surname = options.data.lavoratoreCognome;
+                            // var name = options.data.lavoratoreNome;
+                            // var datanas =Globalize.format(new Date(options.data.lavoratoreDataNascita), "dd/MM/yyyy");
+                            var completeName = options.data.lavoratoreNomeCompleto;//surname + " " + name + " (" + datanas + ")";
+                            var fiscalCode = options.data.lavoratoreCodiceFiscale;
+                            var companyId = options.data.companyId;
+                            $("<a />")
+                                .text(completeName)
+                                .attr("href", "javascript:;")
+                                .on('click', function(){
+                                    ui.Navigation.instance().navigate("summaryworker", "remoteIndex", {
+                                        fiscalCode:fiscalCode,
+                                        companyId : companyId
+                                    });
+                                })
+                                .appendTo(container);
+                        }
+                    },
+                    { dataField:"lavoratoreNome", visible : false},
+                    { dataField:"lavoratoreCognome", visible : false},
+                    { dataField:"lavoratoreSesso", visible : false},
+                    { dataField:"lavoratoreCodiceFiscale", visible : false},
+                    { dataField:"lavoratoreDataNascita", visible : false,dataType:'date',},
+                    { dataField:"lavoratoreNazionalita", visible : false},
+                    { dataField:"lavoratoreProvinciaNascita", visible : false},
+                    { dataField:"lavoratoreLuogoNascita", visible : false},
+                    { dataField:"lavoratoreProvinciaResidenza", visible : false},
+                    { dataField:"lavoratoreCittaResidenza", visible : false},
+                    { dataField:"lavoratoreIndirizzo", visible : false},
+                    { dataField:"lavoratoreCap", visible : false},
+                    { dataField:"lavoratoreTelefono", visible : false},
+                    { dataField:"lavoratoreCellulare", visible : false},
+                    { dataField:"lavoratorMail", visible : false},
+
+
+                    { dataField:"lavoratoreAttribuzione1", visible : false},
+                    { dataField:"lavoratoreAttribuzione2", visible : false},
+                    { dataField:"lavoratoreAttribuzione3", visible : false, caption: 'Incarico' },
+
+                    { dataField:"lavoratoreFondo", visible : false, caption: 'Lavoratore Attribuzione 3' },
+                    { dataField:"lavoratoreNote", visible : true, visibleIndex: 5},
+                    { dataField:"lavoratoreId", visible : false},
+
+
+
+
+
+                ],
+                searchPanel: {
+                    visible: false
+
+                },
+                summary: {
+                    totalItems: [{
+                        column: "categoria",
+                        summaryType: "count",
+                        customizeText: function(data) {
+                            return "Deleghe trovate: " + data.value;
+                        }
+                    }]
+                },
+                columnChooser: {
+                    enabled: true
+                },
+                // onCellClick: function (clickedCell) {
+                //     alert(clickedCell.column.dataField);
+                // },
+                "export": {
+                    enabled: true,
+                    fileName: "deleghe_unc",
+                    allowExportSelectedData: true
+                },
+                // stateStoring: {
+                //     enabled: true,
+                //     type: "localStorage",
+                //     storageKey: "iscrizionilavoratore"
+                // },
+                paging:{
+                    pageSize: 35
+                },
+                sorting:{
+                    mode:"multiple"
+                },
+                onContentReady: function (e) {
+                    var columnChooserView = e.component.getView("columnChooserView");
+                    if (!columnChooserView._popupContainer) {
+                        columnChooserView._initializePopupContainer();
+                        columnChooserView.render();
+                        columnChooserView._popupContainer.option("dragEnabled", false);
+                    }
+                },
+                rowAlternationEnabled: true,
+                showBorders: true,
+                allowColumnReordering:true,
+                allowColumnResizing:true,
+                columnAutoWidth: true,
+                selection:{
+                    mode:"multiple",
+                    showCheckBoxesMode: "always"
+                },
+                hoverStateEnabled: true
+
+
+
+            }).dxDataGrid("instance");
+
+            return grid;
+
+        },
+
+        init: function () {
+
+            var self = this;
+            self.initGridData();
+
+
+        },
+
+        initGridData: function(){
+
+
+            var self = this;
+
+            var service = new model.AjaxService();
+            service.set("url",BASE + "worker/" + self.workerId + "/deleghedetailunc");
+            service.on("load",function(resp){
+
+                if (resp.length == 0){
+                    //visualizzo un messaggio che non è stata trovata una iscrizione
+                    $('#containerMatriceDelegheUnc').append('' +
+                        '<p class="color-red" style="text-align: center;padding-top: 12%;padding-bottom: 3%;">' +
+                        '<i class="material-icons font-size-100">sentiment_dissatisfied</i>' +
+                        '</p>' +
+                        '<p class="text-center">Nessuna delega trovata</p>')
+                }else{
+                    self.initGridIscrizioni(resp);
+                }
+
+
+            });
+            service.on("error",function(e){
+                $.notify.error(e);
+            });
+            service.load();
+
+        }
+
+    });
+
+    var MatriceDelegheBil = core.AObject.extend({
+
+        ctor: function (workerId) {
+            MatriceDelegheBil.super.ctor.call(this);
+            this.workerId = workerId;
+        },
+        initGridIscrizioni : function(responseData){
+
+
+
+            var grid = $('#containerMatriceDelegheBil').dxDataGrid({
+                dataSource:responseData,
+                columns:[
+                    { dataField:"delegaDataDocumento", visible : true, visibleIndex: 1, dataType:'date'},
+                    { dataField:"delegaDataInoltro", visible : false, dataType:'date'},
+                    { dataField:"delegaDataAccettazione", visible : false, dataType:'date'},
+                    { dataField:"delegaDataAttivazione", visible : false, dataType:'date'},
+                    { dataField:"delegaDataAnnullamento", visible : true,visibleIndex: 2, dataType:'date'},
+                    { dataField:"delegaDataRevoca", visible : false, dataType:'date'},
+                    { dataField:"delegaOperatore",  visible : false},
+                    { dataField:"delegaProvincia",  visible : true, visibleIndex: 4},
+                    { dataField:"regione",  visible : false},
+                    { dataField:"delegaBreviMano",  visible : false},
+
+                    { dataField:"delegaSettore", visible : true, visibleIndex: 3},
+                    { dataField:"delegaContract", visible : false, caption: "Contratto"},
+                    { dataField:"delegaStato", visible : false,
+
+                        cellTemplate: function (container, options) {
+                            //container.addClass("img-container");
+                            var stato = options.data.delegaStato;
+
+                            var badgeClass = "";
+                            if (stato == "Accettata" || stato == 'Attivata')
+                                badgeClass = "label-success";
+                            else
+                                badgeClass = "label-default";
+
+                            $("<span class='label'/>")
+                                .text(stato)
+                                .addClass(badgeClass)
+                                .appendTo(container);
+                        }
+                    },
+                    { dataField:"delegaCollaboratore", visible : false},
+                    { dataField:"delegaNote", visible : false},
+                    { dataField:"delegaCausaleSottoscrizione", visible : false},
+                    { dataField:"delegaCausaleRevoca", visible : false},
+                    { dataField:"delegaCausaleAnnullamento", visible : false},
+                    { dataField:"delegaId", visible : false,
+                        cellTemplate: function (container, options) {
+                            //container.addClass("img-container");
+                            var id = options.data.delegaId;
+
+
+                            $("<a />")
+                                .text(id)
+                                .attr("href", "javascript:;")
+                                .on('click', function(){
+                                    ui.Navigation.instance().navigate("editdelega", "index", {
+                                        fs: this.fullScreenForm,
+                                        workerId : options.data.lavoratoreId,
+                                        id: id
+                                    });
+                                })
+                                .appendTo(container);
+                        }
+                    },
+
+                    { dataField:"aziendaRagioneSociale", visible : true, visibleIndex: 6,
+
+                        cellTemplate: function (container, options) {
+                            //container.addClass("img-container");
+                            var name = options.data.aziendaRagioneSociale;
+
+
+                            $("<a />")
+                                .text(name)
+                                .attr("href", "javascript:;")
+                                .on('click', function(){
+                                    ui.Navigation.instance().navigate("summaryfirm", "index", {
+                                        id: options.data.aziendaId
+                                    });
+                                })
+                                .appendTo(container);
+                        }
+                    },
+                    { dataField:"aziendaCitta", visible : false},
+                    { dataField:"aziendaProvincia", visible : false},
+                    { dataField:"aziendaCap", visible : false},
+                    { dataField:"aziendaIndirizzo", visible : false},
+                    { dataField:"aziendaNote", visible : false},
+                    { dataField:"aziendaId", visible : false},
+
+                    { dataField:"lavoratoreNomeCompleto", fixed :true, visible : true, visibleIndex: 0,
+                        cellTemplate: function (container, options) {
+                            //container.addClass("img-container");
+                            // var surname = options.data.lavoratoreCognome;
+                            // var name = options.data.lavoratoreNome;
+                            // var datanas =Globalize.format(new Date(options.data.lavoratoreDataNascita), "dd/MM/yyyy");
+                            var completeName = options.data.lavoratoreNomeCompleto;//surname + " " + name + " (" + datanas + ")";
+                            var fiscalCode = options.data.lavoratoreCodiceFiscale;
+                            var companyId = options.data.companyId;
+                            $("<a />")
+                                .text(completeName)
+                                .attr("href", "javascript:;")
+                                .on('click', function(){
+                                    ui.Navigation.instance().navigate("summaryworker", "remoteIndex", {
+                                        fiscalCode:fiscalCode,
+                                        companyId : companyId
+                                    });
+                                })
+                                .appendTo(container);
+                        }
+                    },
+                    { dataField:"lavoratoreNome", visible : false},
+                    { dataField:"lavoratoreCognome", visible : false},
+                    { dataField:"lavoratoreSesso", visible : false},
+                    { dataField:"lavoratoreCodiceFiscale", visible : false},
+                    { dataField:"lavoratoreDataNascita", visible : false,dataType:'date',},
+                    { dataField:"lavoratoreNazionalita", visible : false},
+                    { dataField:"lavoratoreProvinciaNascita", visible : false},
+                    { dataField:"lavoratoreLuogoNascita", visible : false},
+                    { dataField:"lavoratoreProvinciaResidenza", visible : false},
+                    { dataField:"lavoratoreCittaResidenza", visible : false},
+                    { dataField:"lavoratoreIndirizzo", visible : false},
+                    { dataField:"lavoratoreCap", visible : false},
+                    { dataField:"lavoratoreTelefono", visible : false},
+                    { dataField:"lavoratoreCellulare", visible : false},
+                    { dataField:"lavoratorMail", visible : false},
+
+
+                    { dataField:"lavoratoreAttribuzione1", visible : false},
+                    { dataField:"lavoratoreAttribuzione2", visible : false},
+                    { dataField:"lavoratoreAttribuzione3", visible : false, caption: 'Incarico' },
+
+                    { dataField:"lavoratoreFondo", visible : false, caption: 'Lavoratore Attribuzione 3' },
+                    { dataField:"lavoratoreNote", visible : true, visibleIndex: 5},
+                    { dataField:"lavoratoreId", visible : false},
+
+
+
+
+
+                ],
+                searchPanel: {
+                    visible: false
+
+                },
+                summary: {
+                    totalItems: [{
+                        column: "categoria",
+                        summaryType: "count",
+                        customizeText: function(data) {
+                            return "Deleghe trovate: " + data.value;
+                        }
+                    }]
+                },
+                columnChooser: {
+                    enabled: true
+                },
+                // onCellClick: function (clickedCell) {
+                //     alert(clickedCell.column.dataField);
+                // },
+                "export": {
+                    enabled: true,
+                    fileName: "deleghe_bil",
+                    allowExportSelectedData: true
+                },
+                // stateStoring: {
+                //     enabled: true,
+                //     type: "localStorage",
+                //     storageKey: "iscrizionilavoratore"
+                // },
+                paging:{
+                    pageSize: 35
+                },
+                sorting:{
+                    mode:"multiple"
+                },
+                onContentReady: function (e) {
+                    var columnChooserView = e.component.getView("columnChooserView");
+                    if (!columnChooserView._popupContainer) {
+                        columnChooserView._initializePopupContainer();
+                        columnChooserView.render();
+                        columnChooserView._popupContainer.option("dragEnabled", false);
+                    }
+                },
+                rowAlternationEnabled: true,
+                showBorders: true,
+                allowColumnReordering:true,
+                allowColumnResizing:true,
+                columnAutoWidth: true,
+                selection:{
+                    mode:"multiple",
+                    showCheckBoxesMode: "always"
+                },
+                hoverStateEnabled: true
+
+
+
+            }).dxDataGrid("instance");
+
+            return grid;
+
+        },
+
+        init: function () {
+
+            var self = this;
+            self.initGridData();
+
+
+        },
+
+        initGridData: function(){
+
+
+            var self = this;
+
+            var service = new model.AjaxService();
+            service.set("url",BASE + "worker/" + self.workerId + "/deleghedetailbil");
+            service.on("load",function(resp){
+
+                if (resp.length == 0){
+                    //visualizzo un messaggio che non è stata trovata una iscrizione
+                    $('#containerMatriceDelegheBil').append('' +
+                        '<p class="color-red" style="text-align: center;padding-top: 12%;padding-bottom: 3%;">' +
+                        '<i class="material-icons font-size-100">sentiment_dissatisfied</i>' +
+                        '</p>' +
+                        '<p class="text-center">Nessuna delega trovata</p>')
+                }else{
+                    self.initGridIscrizioni(resp);
+                }
+
+
+            });
+            service.on("error",function(e){
+                $.notify.error(e);
+            });
+            service.load();
+
+        }
+
+    });
+
 
 
 
     exports.matrice = Matrice;
     exports.matriceDeleghe = MatriceDeleghe;
+    exports.matriceDelegheUnc = MatriceDelegheUnc;
+    exports.matriceDelegheBil = MatriceDelegheBil;
     return exports;
 
 

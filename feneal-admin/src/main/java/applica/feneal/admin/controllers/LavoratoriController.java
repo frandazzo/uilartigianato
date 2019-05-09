@@ -556,6 +556,40 @@ public class LavoratoriController {
 
     }
 
+    @RequestMapping(value = "/worker/{id}/deleghedetailunc", method = RequestMethod.GET)
+    @PreAuthorize("isAuthenticated()")
+    public @ResponseBody
+    SimpleResponse iscrizionidetailDelegheUnc(@PathVariable long id) {
+
+        try {
+            List<Delega> a = delServ.getAllWorkerDeleghe(id);
+            return new ValueResponse(delFac.convertDelegheToUiDeleghe(a));
+        } catch(Exception e) {
+            e.printStackTrace();
+            return new ErrorResponse(e.getMessage());
+        }
+
+    }
+
+    @RequestMapping(value = "/worker/{id}/deleghedetailbil", method = RequestMethod.GET)
+    @PreAuthorize("isAuthenticated()")
+    public @ResponseBody
+    SimpleResponse iscrizionidetailDelegheBil(@PathVariable long id) {
+
+        try {
+            List<Delega> a = delServ.getAllWorkerDeleghe(id);
+            return new ValueResponse(delFac.convertDelegheToUiDeleghe(a));
+        } catch(Exception e) {
+            e.printStackTrace();
+            return new ErrorResponse(e.getMessage());
+        }
+
+    }
+
+
+
+
+
     @RequestMapping(value = "/worker/{id}/iscrizionidetail", method = RequestMethod.GET)
     @PreAuthorize("isAuthenticated()")
     public @ResponseBody
