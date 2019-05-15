@@ -349,6 +349,18 @@
 
             #end
 
+
+            #if($roleid == 3 || $roleid == 4)
+
+                <li>
+                    <a href="#/reportiqa" class="framework-navigation">
+                        <span class="fa fa-bar-chart-o"></span>
+                        <span class="sidebar-title">Report quote</span>
+                    </a>
+                </li>
+
+            #end
+
             <script>
                 $(document).ready(function(){
                     var btnStampaCompleta = $('<div class="col-md-12 col-xs-12 margin-bottom-10 p0 complete-print" title="" data-placement="top" data-toggle="tooltip" data-original-title="[data-toggle="tooltip"]">'+
