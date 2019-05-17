@@ -109,7 +109,18 @@ public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbst
                 "                inner join tb_provincie p on d.provinceId = p.ID\n" +
                 "                inner join uilweb_categorias c on d.sectorId = c.id\n" +
                 "                inner join tb_regioni r on r.ID = p.ID_TB_REGIONI\n" +
-                "                where (MAKEDATE("+ String.valueOf(anno) +",1) between d.documentDate and COALESCE(d.cancelDate,CURDATE())) "+ regionWhere +") a\n" +
+                //"                where (MAKEDATE("+ String.valueOf(anno) +",1) between d.documentDate and COALESCE(d.cancelDate,CURDATE())) "+ regionWhere +") a\n" +
+
+
+            "                   where \n" +
+                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno + 1) +",1) and COALESCE(d.cancelDate) is null)\n" +
+                "                or\n" +
+                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno + 1) +",1) and COALESCE(d.cancelDate) >=  MAKEDATE("+ String.valueOf(anno) +",1)   ) \n" +
+                "                \n" + regionWhere +
+                "                )a" +
+
+
+
                 "        group by a.categoria;";
 
 
@@ -124,7 +135,19 @@ public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbst
                     "                inner join tb_provincie p on d.provinceId = p.ID\n" +
                     "                inner join uilweb_categorias c on d.sectorId = c.id\n" +
                     "                inner join tb_regioni r on r.ID = p.ID_TB_REGIONI\n" +
-                    "                where (MAKEDATE("+ String.valueOf(anno) +",1) between d.documentDate and COALESCE(d.cancelDate,d.revokeDate, CURDATE())) "+ regionWhere +") a\n" +
+                  //  "                where (MAKEDATE("+ String.valueOf(anno) +",1) between d.documentDate and COALESCE(d.cancelDate,d.revokeDate, CURDATE())) "+ regionWhere +") a\n" +
+
+
+
+                    "                   where \n" +
+                    "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno + 1) +",1) and COALESCE(d.cancelDate,d.revokeDate) is null)\n" +
+                    "                or\n" +
+                    "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno + 1) +",1) and COALESCE(d.cancelDate,d.revokeDate) >=  MAKEDATE("+ String.valueOf(anno) +",1)   ) \n" +
+                    "                \n" + regionWhere +
+                    "                )a" +
+
+
+
                     "        group by a.categoria;";
         }
 
@@ -137,7 +160,7 @@ public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbst
 
     private void executeQueryAndMaterializeData_QueryAreaGeografica(Session s, String regionId, String tipoEntita, int anno, Box box) {
         String regionWhere = StringUtils.isEmpty(regionId) ? "" : " and r.DESCRIZIONE like '" + regionId.replace("'", "''") + "' ";
-        String revoke = tipoEntita.equals("fenealweb_delega")? " d.revokeDate, ": "";
+        String revoke = tipoEntita.equals("fenealweb_delega")? " ,d.revokeDate ": "";
 
         String sqlQueryProvince = "        select a.provincia as label, count(a.id) as total from (select d.id as id,  r.id as idRegion,\n" +
                 "                p.DESCRIZIONE as provincia,\n" +
@@ -148,7 +171,16 @@ public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbst
                 "                inner join tb_provincie p on d.provinceId = p.ID\n" +
                 "                inner join uilweb_categorias c on d.sectorId = c.id\n" +
                 "                inner join tb_regioni r on r.ID = p.ID_TB_REGIONI\n" +
-                "                where (MAKEDATE("+ String.valueOf(anno) +",1) between d.documentDate and COALESCE(d.cancelDate,"+revoke+"CURDATE())) "+ regionWhere +") a\n" +
+               // "                where (MAKEDATE("+ String.valueOf(anno) +",1) between d.documentDate and COALESCE(d.cancelDate,"+revoke+"CURDATE())) "+ regionWhere +") a\n" +
+
+
+                "                   where \n" +
+                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno +1) +",1) and COALESCE(d.cancelDate"+revoke+") is null)\n" +
+                "                or\n" +
+                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno +1) +",1) and COALESCE(d.cancelDate"+revoke+") >=  MAKEDATE("+ String.valueOf(anno) +",1)     ) \n" +
+                "                \n" + regionWhere +
+                "                )a" +
+
                 "        group by a.provincia;";
 
 
@@ -162,7 +194,14 @@ public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbst
                 "                inner join tb_provincie p on d.provinceId = p.ID\n" +
                 "                inner join uilweb_categorias c on d.sectorId = c.id\n" +
                 "                inner join tb_regioni r on r.ID = p.ID_TB_REGIONI\n" +
-                "                where (MAKEDATE("+ String.valueOf(anno) +",1) between d.documentDate and COALESCE(d.cancelDate,"+revoke+"CURDATE())) ) a\n" +
+               // "                where (MAKEDATE("+ String.valueOf(anno) +",1) between d.documentDate and COALESCE(d.cancelDate,"+revoke+"CURDATE())) ) a\n" +
+
+                "                   where \n" +
+                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno+1) +",1) and COALESCE(d.cancelDate"+revoke+") is null)\n" +
+                "                or\n" +
+                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno +1) +",1) and COALESCE(d.cancelDate"+revoke+")  >=  MAKEDATE("+ String.valueOf(anno) +",1)     ) \n" +
+                "                )a" +
+
                 "        group by a.regione;";
 
         executeAndMaterialize(s, regionId, box, sqlQueryProvince, sqlQueryRegion);
@@ -181,7 +220,7 @@ public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbst
         String categoriaWhere = StringUtils.isEmpty(categoria)? "": " and c.description like '" + categoria + "' ";
 
 
-        String revoke = tipoEntita.equals("fenealweb_delega")? " d.revokeDate, ": "";
+        String revoke = tipoEntita.equals("fenealweb_delega")? " ,d.revokeDate ": "";
 
 
         String sqlQueryProvince = "select a.provincia as label, count(a.id) as total from (select d.id as id,  r.id as idRegion,\n" +
@@ -193,7 +232,15 @@ public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbst
                 "                inner join tb_provincie p on d.provinceId = p.ID\n" +
                 "                inner join uilweb_categorias c on d.sectorId = c.id\n" +
                 "                inner join tb_regioni r on r.ID = p.ID_TB_REGIONI\n" +
-                "                where (MAKEDATE("+ String.valueOf(anno) +",1) between d.documentDate and COALESCE(d.cancelDate,"+ revoke+"CURDATE())) "+ regionWhere + categoriaWhere +") a\n" +
+             //   "                where (MAKEDATE("+ String.valueOf(anno) +",1) between d.documentDate and COALESCE(d.cancelDate,"+ revoke+"CURDATE())) "+ regionWhere + categoriaWhere +") a\n" +
+                "                   where \n" +
+                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno+1) +",1) and COALESCE(d.cancelDate"+revoke+") is null)\n" +
+                "                or\n" +
+                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno+1) +",1) and COALESCE(d.cancelDate"+revoke+")     >=  MAKEDATE("+ String.valueOf(anno) +",1)     ) \n" +
+                "                \n" + regionWhere + categoriaWhere +
+                "                )a" +
+
+
                 "        group by a.provincia;";
 
 
@@ -207,7 +254,17 @@ public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbst
                 "                inner join tb_provincie p on d.provinceId = p.ID\n" +
                 "                inner join uilweb_categorias c on d.sectorId = c.id\n" +
                 "                inner join tb_regioni r on r.ID = p.ID_TB_REGIONI\n" +
-                "                where (MAKEDATE("+ String.valueOf(anno) +",1) between d.documentDate and COALESCE(d.cancelDate,"+revoke +"CURDATE())) "+ categoriaWhere +") a\n" +
+               // "                where (MAKEDATE("+ String.valueOf(anno) +",1) between d.documentDate and COALESCE(d.cancelDate,"+revoke +"CURDATE())) "+ categoriaWhere +") a\n" +
+
+                "                   where \n" +
+                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno+1) +",1) and COALESCE(d.cancelDate"+revoke+") is null)\n" +
+                "                or\n" +
+                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno+1) +",1) and COALESCE(d.cancelDate"+revoke+")  >=  MAKEDATE("+ String.valueOf(anno) +",1)     ) \n" +
+                "                \n" +  categoriaWhere +
+                "                )a" +
+
+
+
                 "        group by a.regione;";
 
         executeAndMaterialize(s, regionId, box, sqlQueryProvince, sqlQueryRegion);
