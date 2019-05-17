@@ -113,9 +113,9 @@ public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbst
 
 
             "                   where \n" +
-                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno + 1) +",1) and COALESCE(d.cancelDate) is null)\n" +
+                "                ((d.documentDate <= MAKEDATE("+ String.valueOf(anno + 1) +",1) and COALESCE(d.cancelDate) is null)\n" +
                 "                or\n" +
-                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno + 1) +",1) and COALESCE(d.cancelDate) >=  MAKEDATE("+ String.valueOf(anno) +",1)   ) \n" +
+                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno + 1) +",1) and COALESCE(d.cancelDate) >=  MAKEDATE("+ String.valueOf(anno) +",1)   )) \n" +
                 "                \n" + regionWhere +
                 "                )a" +
 
@@ -140,9 +140,9 @@ public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbst
 
 
                     "                   where \n" +
-                    "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno + 1) +",1) and COALESCE(d.cancelDate,d.revokeDate) is null)\n" +
+                    "                ((d.documentDate <= MAKEDATE("+ String.valueOf(anno + 1) +",1) and COALESCE(d.cancelDate,d.revokeDate) is null)\n" +
                     "                or\n" +
-                    "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno + 1) +",1) and COALESCE(d.cancelDate,d.revokeDate) >=  MAKEDATE("+ String.valueOf(anno) +",1)   ) \n" +
+                    "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno + 1) +",1) and COALESCE(d.cancelDate,d.revokeDate) >=  MAKEDATE("+ String.valueOf(anno) +",1)   )) \n" +
                     "                \n" + regionWhere +
                     "                )a" +
 
@@ -175,9 +175,9 @@ public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbst
 
 
                 "                   where \n" +
-                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno +1) +",1) and COALESCE(d.cancelDate"+revoke+") is null)\n" +
+                "                ((d.documentDate <= MAKEDATE("+ String.valueOf(anno +1) +",1) and COALESCE(d.cancelDate"+revoke+") is null)\n" +
                 "                or\n" +
-                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno +1) +",1) and COALESCE(d.cancelDate"+revoke+") >=  MAKEDATE("+ String.valueOf(anno) +",1)     ) \n" +
+                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno +1) +",1) and COALESCE(d.cancelDate"+revoke+") >=  MAKEDATE("+ String.valueOf(anno) +",1)     )) \n" +
                 "                \n" + regionWhere +
                 "                )a" +
 
@@ -197,9 +197,9 @@ public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbst
                // "                where (MAKEDATE("+ String.valueOf(anno) +",1) between d.documentDate and COALESCE(d.cancelDate,"+revoke+"CURDATE())) ) a\n" +
 
                 "                   where \n" +
-                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno+1) +",1) and COALESCE(d.cancelDate"+revoke+") is null)\n" +
+                "                ((d.documentDate <= MAKEDATE("+ String.valueOf(anno+1) +",1) and COALESCE(d.cancelDate"+revoke+") is null)\n" +
                 "                or\n" +
-                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno +1) +",1) and COALESCE(d.cancelDate"+revoke+")  >=  MAKEDATE("+ String.valueOf(anno) +",1)     ) \n" +
+                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno +1) +",1) and COALESCE(d.cancelDate"+revoke+")  >=  MAKEDATE("+ String.valueOf(anno) +",1)     )) \n" +
                 "                )a" +
 
                 "        group by a.regione;";
@@ -234,9 +234,9 @@ public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbst
                 "                inner join tb_regioni r on r.ID = p.ID_TB_REGIONI\n" +
              //   "                where (MAKEDATE("+ String.valueOf(anno) +",1) between d.documentDate and COALESCE(d.cancelDate,"+ revoke+"CURDATE())) "+ regionWhere + categoriaWhere +") a\n" +
                 "                   where \n" +
-                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno+1) +",1) and COALESCE(d.cancelDate"+revoke+") is null)\n" +
+                "                ((d.documentDate <= MAKEDATE("+ String.valueOf(anno+1) +",1) and COALESCE(d.cancelDate"+revoke+") is null)\n" +
                 "                or\n" +
-                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno+1) +",1) and COALESCE(d.cancelDate"+revoke+")     >=  MAKEDATE("+ String.valueOf(anno) +",1)     ) \n" +
+                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno+1) +",1) and COALESCE(d.cancelDate"+revoke+")     >=  MAKEDATE("+ String.valueOf(anno) +",1)    ) ) \n" +
                 "                \n" + regionWhere + categoriaWhere +
                 "                )a" +
 
@@ -257,9 +257,9 @@ public class StatisticsDelegheAbstractUtilsImpl implements StatisticsDelegheAbst
                // "                where (MAKEDATE("+ String.valueOf(anno) +",1) between d.documentDate and COALESCE(d.cancelDate,"+revoke +"CURDATE())) "+ categoriaWhere +") a\n" +
 
                 "                   where \n" +
-                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno+1) +",1) and COALESCE(d.cancelDate"+revoke+") is null)\n" +
+                "                ((d.documentDate <= MAKEDATE("+ String.valueOf(anno+1) +",1) and COALESCE(d.cancelDate"+revoke+") is null)\n" +
                 "                or\n" +
-                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno+1) +",1) and COALESCE(d.cancelDate"+revoke+")  >=  MAKEDATE("+ String.valueOf(anno) +",1)     ) \n" +
+                "                (d.documentDate <= MAKEDATE("+ String.valueOf(anno+1) +",1) and COALESCE(d.cancelDate"+revoke+")  >=  MAKEDATE("+ String.valueOf(anno) +",1)     )) \n" +
                 "                \n" +  categoriaWhere +
                 "                )a" +
 
