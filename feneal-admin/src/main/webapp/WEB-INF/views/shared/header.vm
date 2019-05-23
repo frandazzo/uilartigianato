@@ -153,6 +153,6 @@
     </header>
     <!-- End: Header -->
 
-    #parse("/shared/nav.vm")
+    #parse("/shared/newnav.vm")
 
 
