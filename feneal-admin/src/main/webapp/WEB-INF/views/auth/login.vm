@@ -59,7 +59,7 @@
                 <div class="row mb15 table-layout">
                     <div class="col-xs-12 va-m pln">
                         <a href="${wwwBase}" title="Return to Dashboard">
-                            <img src="${staticBase}images/loader_uilart.png" title="Feneal Web" class="img-responsive w250">
+                            <img src="${staticBase}images/LogoNewSenzao.png" title="Feneal Web" class="img-responsive w350">
                         </a>
                     </div>
                 </div>

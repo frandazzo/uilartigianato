@@ -64,7 +64,7 @@
     <!-- Start: Header -->
     <header class="navbar navbar-fixed-top bg-light">
         <div class="navbar-branding">
-            <a class="navbar-brand" href="${wwwBase}"> <img src="${staticBase}images/loader_uilart.png" style="height: 95%;"> </a>
+            <a class="navbar-brand" href="${wwwBase}"> <img src="${staticBase}images/LogoNewSenzao.png" style="height: 95%;"> </a>
             <span id="toggle_sidemenu_l" class="glyphicons glyphicons-show_lines"></span>
             <ul class="nav navbar-nav pull-right hidden">
                 <li>
