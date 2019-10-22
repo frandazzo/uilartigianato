@@ -137,6 +137,11 @@ public class PermissionsSetup implements AppSetup {
         registerPermissions("emaillayout");
         configureCrudSecurityConfigurer("emaillayout", PermissionMap.staticPermissions("emaillayout"));
 
+        registerPermissions("communicationstruct");
+        configureCrudSecurityConfigurer("communicationstruct", PermissionMap.staticPermissions("communicationstruct"));
+
+
+
 //        registerPermissions("clinicalcategory");
 //        registerPermissions("clinicalcenter");
 //        registerPermissions("teleconsulto");

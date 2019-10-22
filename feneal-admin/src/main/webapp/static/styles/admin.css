@@ -443,3 +443,7 @@ em[data-error-property="file1"]{
     color: red;
     text-decoration: underline;
 }
+
+.padding-20 {
+    padding: 20px;
+}

@@ -36,9 +36,20 @@
     <!-- End: Topbar -->
 
     <!-- Begin: Content -->
+
+
     <section id="spa-container" class="animated fadeIn">
 
         <div class="col-md-12 margin-top-20">
+
+            #if ($commFlag == true)
+                <div class="alert alert-sm alert-border-left alert-info light alert-dismissable">
+
+                    <i class="fa fa-info pr10"></i>
+                    Vai alle
+                    <a href="#comunicazioni" class="alert-link"><u> COMUNICAZIONI</u></a>
+                </div>
+            #end
 
             <div class="panel">
                 <div class="panel-heading ui-sortable-handle">
@@ -116,6 +127,71 @@
             </div>
 
         </div>
+
+
+        #if($roleid != 1)
+        <div id="comunicazioni" class="col-md-12 margin-top-10">
+            <div class="panel">
+                <div class="panel-heading ui-sortable-handle">
+                    <span class="panel-title">Comunicazioni</span>
+                </div>
+                #if($commFlag == true)
+                    #foreach($c in $commStructList)
+                        <div class="panel-body pn" style="border-right: 0px">
+                            <div class="col-md-12" style="margin-top: 15px;border: 1px solid black;padding: 20px;">
+                                <big class="text-left"><b style="color: #4a89dc;">Titolo: </b><b>$c.title </b></big><big class="text-right" style="margin-left: 20px;"><b style="color: #4a89dc;">Data: </b> $c.date</big>
+
+
+                                <blockquote class="blockquote-rounded mv20">
+                                    <p class="text-left"><b>Note: </b>$c.description</p>
+                                </blockquote>
+                                <p class="text-left"><b>Allegati: </b></p>
+                                #if($c.nameAtt1 != "")
+                                    <div class="col-md-4">
+                                        <p class="fs15 " id="nameAtt1">
+                                            <span class="glyphicons glyphicons-paperclip"></span>
+                                            <a target="_blank" href="${wwwBase}$c.att1">$c.nameAtt1</a>
+                                        </p>
+                                    </div>
+                                #end
+
+                                #if($c.nameAtt2 != "")
+                                    <div class="col-md-4">
+                                        <p class="fs15 " id="nameAtt2">
+                                            <span class="glyphicons glyphicons-paperclip"></span>
+                                            <a target="_blank" href="${wwwBase}$c.att2">$c.nameAtt2</a>
+                                        </p>
+                                    </div>
+                                #end
+
+                                #if($c.nameAtt3 != "")
+                                    <div class="col-md-4">
+                                        <p class="fs15 " id="nameAtt3">
+                                            <span class="glyphicons glyphicons-paperclip"></span>
+                                            <a target="_blank" href="${wwwBase}$c.att3">$c.nameAtt3</a>
+                                        </p>
+                                    </div>
+                                #end
+
+                            </div>
+                        </div>
+                    #end
+
+                #else
+                    <div class="panel-body pn" style="border-right: 0px">
+                        <div class="col-md-12 col-xs-12 padding-20">
+                            <span class=""><i>Non sono presenti delle comunicazioni.</i></span>
+                        </div>
+                    </div>
+                #end
+
+            </div>
+        </div>
+
+        #end
+
+
+
 
         ##utente amministratore
         #if($roleid==1 || $roleid== 2)

@@ -109,6 +109,9 @@ private BonificoCrudConfig bonificoCrudConfig;
     @Autowired
     private Attribuzione12CrudConfig attrCrudConf;
 
+    @Autowired
+    private CommunicationStructureCrudConfig commStructCrudConf;
+
 
 
     @Override
@@ -118,6 +121,7 @@ private BonificoCrudConfig bonificoCrudConfig;
         attrCrudConf.setup();
         userCrudConfig.setup();
         companyCrudConfig.setup();
+        commStructCrudConf.setup();
         compUsrcrudConf.setup();
         bonificoCrudConfig.setup();
 

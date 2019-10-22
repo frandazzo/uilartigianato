@@ -58,6 +58,7 @@ public class RolesSetup implements AppSetup {
         adminPermissions.addAll(PermissionMap.staticPermissions("widget"));
         adminPermissions.addAll(PermissionMap.staticPermissions("firm"));
         adminPermissions.addAll(PermissionMap.staticPermissions("emaillayout"));
+        adminPermissions.addAll(PermissionMap.staticPermissions("communicationstruct"));
         long adminId = 1;
 
         setPermissionsToRole(adminPermissions, adminId);

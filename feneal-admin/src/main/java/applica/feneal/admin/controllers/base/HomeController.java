@@ -1,7 +1,11 @@
 package applica.feneal.admin.controllers.base;
 
+import applica.feneal.admin.facade.CommunicationStructureFacade;
+import applica.feneal.admin.viewmodel.UiCommunicationStructure;
 import applica.feneal.domain.model.User;
+import applica.feneal.domain.model.core.CommunicationStructure;
 import applica.feneal.domain.model.core.Company;
+import applica.feneal.services.CommunicationStructureService;
 import applica.feneal.services.impl.importData.ImportCausaliService;
 import applica.framework.security.Security;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -27,6 +33,8 @@ public class HomeController {
     private Security sec;
 
 
+    @Autowired
+    private CommunicationStructureFacade commStrFacade;
 
 
 
@@ -87,6 +95,20 @@ public class HomeController {
        // inizializzo le causali di base dell'applicativo se l'utente loggato ha un contesto regionale
         if (u.retrieveUserRole().getLid() == 3 || u.retrieveUserRole().getLid() == 4){
             causService.setup();
+        }
+
+        if(u.retrieveUserRole().getLid() != 1){
+
+
+
+            List<UiCommunicationStructure> commStructList = commStrFacade.retriveCommStructureList();
+
+            if(commStructList.size() > 0) {
+                model.addAttribute("commFlag", true);
+            }else {
+                model.addAttribute("commFlag", false);
+            }
+            model.addAttribute("commStructList", commStructList);
         }
 
 

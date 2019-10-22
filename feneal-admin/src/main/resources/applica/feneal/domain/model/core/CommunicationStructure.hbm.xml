@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="applica.feneal.domain.model.core.CommunicationStructure" table="fenealweb_communication_struct" >
+        <id name="id" type="long">
+            <generator class="native" />
+        </id>
+        <property name="description" type="text" length="10000000"/>
+        <property name="date" />
+        <property name="briefDescription"  />
+        <property name="attached1"  />
+        <property name="attached2" />
+        <property name="attached3" />
+        <property name="nomeattached1"  />
+        <property name="nomeattached2" />
+        <property name="nomeattached3" />
+
+
+    </class>
+</hibernate-mapping>
