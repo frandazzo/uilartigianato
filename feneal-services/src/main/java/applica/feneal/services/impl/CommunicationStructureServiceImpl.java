@@ -38,7 +38,7 @@ public class CommunicationStructureServiceImpl implements CommunicationStructure
                     tx =s.beginTransaction();
 
                     String queryString = String.format("SELECT * FROM uilartigianato.fenealweb_communication_struct\n" +
-                            "order by date DESC LIMIT 5;");
+                            "order by date DESC;");
 
                     SQLQuery query = s.createSQLQuery(queryString).addEntity(CommunicationStructure.class);
 

@@ -147,7 +147,7 @@
                                 </blockquote>
                                 <p class="text-left"><b>Allegati: </b></p>
                                 #if($c.nameAtt1 != "")
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <p class="fs15 " id="nameAtt1">
                                             <span class="glyphicons glyphicons-paperclip"></span>
                                             <a target="_blank" href="${wwwBase}$c.att1">$c.nameAtt1</a>
@@ -156,7 +156,7 @@
                                 #end
 
                                 #if($c.nameAtt2 != "")
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <p class="fs15 " id="nameAtt2">
                                             <span class="glyphicons glyphicons-paperclip"></span>
                                             <a target="_blank" href="${wwwBase}$c.att2">$c.nameAtt2</a>
@@ -165,7 +165,7 @@
                                 #end
 
                                 #if($c.nameAtt3 != "")
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <p class="fs15 " id="nameAtt3">
                                             <span class="glyphicons glyphicons-paperclip"></span>
                                             <a target="_blank" href="${wwwBase}$c.att3">$c.nameAtt3</a>
