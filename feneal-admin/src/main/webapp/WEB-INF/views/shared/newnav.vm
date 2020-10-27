@@ -705,6 +705,12 @@
                                 <span class="sidebar-title">Riepilogo</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="#/reportiqa" class="framework-navigation">
+                                <span class="fa fa-bar-chart-o"></span>
+                                <span class="sidebar-title">Report quote</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             ##PROVENIENZAUNC

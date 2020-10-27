@@ -36,6 +36,12 @@ public class AziendeRepositoryWrapper implements Repository<Azienda> {
 
         final LoadRequest finalRequest = request;
 
+        request.popFilter("alternativeDescription").ifPresent(filter -> {
+            if (StringUtils.hasLength(String.valueOf(filter.getValue())))
+                finalRequest.getFilters().add(new Filter("alternativeDescription", filter.getValue(),Filter.LIKE));
+        });
+
+
         request.popFilter("province").ifPresent(filter -> {
             if (StringUtils.hasLength(String.valueOf(filter.getValue())))
                 finalRequest.getFilters().add(new Filter("province", geoSvc.getProvinceById(Integer.valueOf((String)filter.getValue())),Filter.EQ));

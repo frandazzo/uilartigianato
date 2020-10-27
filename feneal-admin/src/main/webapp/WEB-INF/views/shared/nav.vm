@@ -350,7 +350,7 @@
             #end
 
 
-            #if($roleid == 3 || $roleid == 4)
+            #if($roleid == 3 || $roleid == 4 || $roleid == 6)
 
                 <li>
                     <a href="#/reportiqa" class="framework-navigation">
